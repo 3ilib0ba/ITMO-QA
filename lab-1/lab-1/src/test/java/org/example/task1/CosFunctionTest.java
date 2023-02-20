@@ -6,11 +6,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class CosFunctionTest {
-    double epsilon = 0.000001;
+    private final double epsilon = 0.000001;
 
     @ParameterizedTest
-    @ValueSource(doubles = {0.0, Math.PI, Math.PI / 2, 3 * Math.PI / 2})
-    public void checkValues(double value) {
+    @ValueSource(doubles = {0.0, Math.PI / 2, Math.PI, 3 * Math.PI / 2})
+    public void checkNormalValues(double value) {
         Assertions.assertTrue(Math.cos(value) - CosFunction.cos(value) < epsilon);
+        Assertions.assertTrue(Math.cos(-value) - CosFunction.cos(value) < epsilon);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {2 * Math.PI, 5 * Math.PI / 2, 3 * Math.PI, 7 * Math.PI / 2})
+    public void checkNotNormalValues(double value) {
+        Assertions.assertTrue(Math.cos(value) - CosFunction.cos(value) < epsilon);
+        Assertions.assertTrue(Math.cos(-value) - CosFunction.cos(-value) < epsilon);
     }
 }

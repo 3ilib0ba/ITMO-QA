@@ -5,21 +5,23 @@ public class AirHamster implements Flying, Alive {
     private String name;
 
     public AirHamster() {
+        name = "Default AirHamster";
         status = Status.NORMAL;
     }
 
     public AirHamster(String name) {
-        this.name = name;
-        status = Status.NORMAL;
+        this();
+        setName(name);
     }
 
-    public void hypnosis(Alive goal) {
-        if (goal.getStatus() == Status.DEAD) {
-            System.out.println(getName() + " can't hypnosis a dead creature");
-            return;
-        }
-        goal.setStatus(Status.CONFUSED);
-        System.out.println(getName() + " change status of " + goal.getName() + " now it's confused");
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name == null) return;
+        this.name = name;
     }
 
     public Status getStatus() {
@@ -28,7 +30,8 @@ public class AirHamster implements Flying, Alive {
 
     @Override
     public void setStatus(Status status) {
-        if (this.status != null && this.status == Status.DEAD) {
+        if (status == null) return;
+        if (this.status == Status.DEAD) {
             System.out.println(getName() + "can't change status because it's dead");
             return;
         }
@@ -46,15 +49,19 @@ public class AirHamster implements Flying, Alive {
         this.status = status;
     }
 
-    @Override
-    public String getName() {
-        if (name == null) {
-            return "just an air hamster";
+    public void doHypnosis(Alive goal) {
+        if (goal == null) return;
+        if (goal.getStatus() == Status.DEAD) {
+            System.out.println(getName() + " can't hypnosis a dead creature");
+            return;
         }
-        return name;
+        goal.setStatus(Status.CONFUSED);
+        System.out.println(getName() + " change status of " + goal.getName() + " now it's confused");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString(){
+        return "AirHamster - name: " + this.getName() + ", status: " + this.getStatus().toString() + ".";
     }
+
 }

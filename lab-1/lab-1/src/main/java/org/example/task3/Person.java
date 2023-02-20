@@ -7,10 +7,19 @@ public class Person implements Alive, Cargo {
     private Status status;
     private String action;
 
+    public Person() {
+        this.name = "Default Name";
+        this.weight = 45;
+        this.status = Status.NORMAL;
+        this.action = null;
+        this.cargo = null;
+    }
+
     public Person(String name, double weight, Status status) {
-        this.name = name;
-        this.weight = weight;
-        this.status = status;
+        this();
+        setName(name);
+        setWeight(weight);
+        setStatus(status);
     }
 
     @Override
@@ -18,16 +27,19 @@ public class Person implements Alive, Cargo {
         return name;
     }
 
+    public void setName(String name) {
+        if (name == null) return;
+        this.name = name;
+    }
+
+    @Override
     public double getWeight() {
         return weight;
     }
 
     public void setWeight(double weight) {
+        if (weight <= 0) return;
         this.weight = weight;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Cargo getCargo() {
@@ -35,6 +47,14 @@ public class Person implements Alive, Cargo {
     }
 
     public void setCargo(Cargo cargo) {
+        if (cargo == null) {
+            this.cargo = null;
+            return;
+        }
+        if (cargo.getWeight() > this.weight / 2) {
+            System.out.println(name + " cannot carry the cargo - " + cargo.getName() + " is to heavy");
+            return;
+        }
         System.out.println("Now " + name + "has a cargo -> " + cargo.getName());
         this.cargo = cargo;
     }
@@ -45,8 +65,9 @@ public class Person implements Alive, Cargo {
 
     @Override
     public void setStatus(Status status) {
-        if (this.status != null && this.status == Status.DEAD) {
-            System.out.println(name + "can't change status because it's dead");
+        if (status == null) return;
+        if (this.status == Status.DEAD) {
+            System.out.println(name + " can't change status because it's dead");
             return;
         }
         switch (status) {
@@ -60,7 +81,7 @@ public class Person implements Alive, Cargo {
                 break;
             case DEAD:
                 System.out.println(name + " is dead. press F");
-                action = name + "is dead";
+                action = name + " is dead";
                 break;
         }
         this.status = status;
@@ -71,19 +92,32 @@ public class Person implements Alive, Cargo {
     }
 
     public void setAction(String action) {
-        if (status != null) {
-            switch (status) {
-                case DEAD:
-                case CONFUSED:
-                case HARD_SICK:
-                case SLEEP:
-                    System.out.println(name + " in bad condition for changing action");
-                    break;
-                default:
-                    this.action = action;
-            }
-        } else {
-            System.out.println("status of " + name + " must be not null");
+        switch (status) {
+            case DEAD:
+            case CONFUSED:
+            case HARD_SICK:
+            case SLEEP:
+                System.out.println(name + " in bad condition for changing action");
+                break;
+            default:
+                this.action = action;
         }
+    }
+
+    public boolean haveCargo() {
+        return this.getCargo() != null;
+    }
+
+    public boolean haveAction() {
+        return this.getAction() != null;
+    }
+
+    @Override
+    public String toString(){
+        String str = "Person - name: " + this.getName() +
+                ", weight: " + this.getWeight() + ", status: " + this.getStatus();
+        if (haveCargo()) str += ", cargo: " + this.getCargo().toString();
+        if (haveAction()) str += ", action: " + this.getAction();
+        return str + ".";
     }
 }

@@ -1,14 +1,12 @@
 package org.example.task1;
 
 public class CosFunction {
+    private static final double rEps = 0.0000000000001;
 
-    public static double getFactorial(int i) {
+    private static double getFactorial(int i) {
         double result = 1;
         while (i > 0) {
             result *= i;
-            if (result < 0) {
-                throw new RuntimeException();
-            }
             i--;
         }
 
@@ -34,19 +32,15 @@ public class CosFunction {
         double result = 1;
         double R = 1;
         boolean sign = false;
-        int i;
 
-        try {
-            for (i = 2; R > 0.0000000000001; i += 2) {
-                R = Math.pow(x, i) / getFactorial(i);
-                if (sign) {
-                    result += R;
-                } else {
-                    result -= R;
-                }
-                sign = !sign;
+        for (int i = 2; R > rEps; i += 2) {
+            R = Math.pow(x, i) / getFactorial(i);
+            if (sign) {
+                result += R;
+            } else {
+                result -= R;
             }
-        } catch (RuntimeException exp) {
+            sign = !sign;
         }
 
         return result;
