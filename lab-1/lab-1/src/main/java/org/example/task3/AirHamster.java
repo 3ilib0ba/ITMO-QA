@@ -9,7 +9,7 @@ public class AirHamster implements Flying, Alive {
         status = Status.NORMAL;
     }
 
-    public AirHamster(String name) {
+    public AirHamster(final String name) {
         this();
         setName(name);
     }
@@ -19,17 +19,20 @@ public class AirHamster implements Flying, Alive {
         return name;
     }
 
-    public void setName(String name) {
-        if (name == null) return;
+    public void setName(final String name) {
+        if (name == null) {
+            return;
+        }
         this.name = name;
     }
 
+    @Override
     public Status getStatus() {
         return status;
     }
 
     @Override
-    public void setStatus(Status status) {
+    public void setStatus(final Status status) {
         if (status == null) return;
         if (this.status == Status.DEAD) {
             System.out.println(getName() + "can't change status because it's dead");
@@ -58,7 +61,7 @@ public class AirHamster implements Flying, Alive {
         this.status = status;
     }
 
-    public void doHypnosis(Alive goal) {
+    public void doHypnosis(final Alive goal) {
         if (goal == null) return;
         if (goal.getStatus() == Status.DEAD) {
             System.out.println(getName() + " can't hypnosis a dead creature");

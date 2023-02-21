@@ -1,44 +1,46 @@
 package org.example.task1;
 
 public class CosFunction {
-    private static final double rEps = 0.0000000000001;
+    private static final double REPS = 0.000_000_000_001;
 
-    private static double getFactorial(int i) {
+    private static double getFactorial(final int i) {
         double result = 1;
-        while (i > 0) {
-            result *= i;
-            i--;
+        int elem = i;
+        while (elem > 0) {
+            result *= elem;
+            elem--;
         }
 
         return result;
     }
 
-    private static double toNormalAngle(double x) {
-        if (x < 0) {
-            x = -x;
+    private static double toNormalAngle(final double x) {
+        double normalX = x;
+        if (normalX < 0) {
+            normalX = -normalX;
         }
-        if (x > 2 * Math.PI) {
-            int count = (int) (x / (2 * Math.PI));
-            x -= 2 * count * Math.PI;
+        if (normalX > 2 * Math.PI) {
+            final int count = (int) (normalX / (2 * Math.PI));
+            normalX -= 2 * count * Math.PI;
         }
-        return x;
+        return normalX;
     }
 
     /**
      * x in radians
      */
-    public static double cos(double x) {
-        x = toNormalAngle(x);
+    public static double cos(final double x) {
+        final double normalizedX = toNormalAngle(x);
         double result = 1;
-        double R = 1;
+        double r = 1;
         boolean sign = false;
 
-        for (int i = 2; R > rEps; i += 2) {
-            R = Math.pow(x, i) / getFactorial(i);
+        for (int i = 2; r > REPS; i += 2) {
+            r = Math.pow(normalizedX, i) / getFactorial(i);
             if (sign) {
-                result += R;
+                result += r;
             } else {
-                result -= R;
+                result -= r;
             }
             sign = !sign;
         }

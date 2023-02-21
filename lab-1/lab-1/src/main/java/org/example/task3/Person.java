@@ -15,7 +15,7 @@ public class Person implements Alive, Cargo {
         this.cargo = null;
     }
 
-    public Person(String name, double weight, Status status) {
+    public Person(final String name, final double weight, final Status status) {
         this();
         setName(name);
         setWeight(weight);
@@ -27,8 +27,10 @@ public class Person implements Alive, Cargo {
         return name;
     }
 
-    public void setName(String name) {
-        if (name == null) return;
+    public void setName(final String name) {
+        if (name == null) {
+            return;
+        }
         this.name = name;
     }
 
@@ -37,8 +39,10 @@ public class Person implements Alive, Cargo {
         return weight;
     }
 
-    public void setWeight(double weight) {
-        if (weight <= 0) return;
+    public void setWeight(final double weight) {
+        if (weight <= 0) {
+            return;
+        }
         this.weight = weight;
     }
 
@@ -46,7 +50,7 @@ public class Person implements Alive, Cargo {
         return cargo;
     }
 
-    public void setCargo(Cargo cargo) {
+    public void setCargo(final Cargo cargo) {
         if (cargo == null) {
             this.cargo = null;
             return;
@@ -59,13 +63,16 @@ public class Person implements Alive, Cargo {
         this.cargo = cargo;
     }
 
+    @Override
     public Status getStatus() {
         return status;
     }
 
     @Override
-    public void setStatus(Status status) {
-        if (status == null) return;
+    public void setStatus(final Status status) {
+        if (status == null) {
+            return;
+        }
         if (this.status == Status.DEAD) {
             System.out.println(name + " can't change status because it's dead");
             return;
@@ -83,6 +90,15 @@ public class Person implements Alive, Cargo {
                 System.out.println(name + " is dead. press F");
                 action = name + " is dead";
                 break;
+            case NORMAL:
+                System.out.println(name + " is normal");
+                break;
+            case HARD_SICK:
+                System.out.println(name + " is hard sick");
+                break;
+            case SICK:
+                System.out.println(name + " is sick");
+                break;
         }
         this.status = status;
     }
@@ -91,7 +107,7 @@ public class Person implements Alive, Cargo {
         return action;
     }
 
-    public void setAction(String action) {
+    public void setAction(final String action) {
         switch (status) {
             case DEAD:
             case CONFUSED:

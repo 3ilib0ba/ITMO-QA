@@ -2,6 +2,6 @@ package org.example.task3;
 
 public interface Cargo {
     // it shows that object can be cargo
-    public String getName();
-    public double getWeight();
+    String getName();
+    double getWeight();
 }

@@ -7,15 +7,15 @@ public class TextModelTest {
 
     @Test
     public void toStringCheck() {
-        AirHamster airHamster = new AirHamster();
-        Person cargoPerson = new Person("Marta", 38, Status.NORMAL);
-        Person person = new Person("Billy", 80, Status.NORMAL);
+        final AirHamster airHamster = new AirHamster();
+        final Person cargoPerson = new Person("Marta", 38, Status.NORMAL);
+        final Person person = new Person("Billy", 80, Status.NORMAL);
         person.setAction("Default Action");
         person.setCargo(cargoPerson);
 
-        String expectedAirHamsterString = "AirHamster - name: Default AirHamster, status: Normal.";
-        String expectedCargoPersonString = "Person - name: Marta, weight: 38.0, status: Normal.";
-        String expectedPersonString = "Person - name: Billy, weight: 80.0, status: Normal, cargo: "
+        final String expectedAirHamsterString = "AirHamster - name: Default AirHamster, status: Normal.";
+        final String expectedCargoPersonString = "Person - name: Marta, weight: 38.0, status: Normal.";
+        final String expectedPersonString = "Person - name: Billy, weight: 80.0, status: Normal, cargo: "
                 + expectedCargoPersonString + ", action: Default Action.";
 
         Assertions.assertEquals(airHamster.toString(), expectedAirHamsterString);
@@ -25,8 +25,8 @@ public class TextModelTest {
 
     @Test
     public void checkSetIncorrectNullValues() {
-        AirHamster airHamster = new AirHamster();
-        Person person = new Person("Billy", 80, Status.NORMAL);
+        final AirHamster airHamster = new AirHamster();
+        final Person person = new Person("Billy", 80, Status.NORMAL);
 
         airHamster.setName(null);
         airHamster.setStatus(null);
@@ -39,8 +39,8 @@ public class TextModelTest {
 
     @Test
     public void checkDeadObjectSetStatus() {
-        Person person = new Person("Marta", 50, Status.DEAD);
-        AirHamster airHamster = new AirHamster();
+        final Person person = new Person("Marta", 50, Status.DEAD);
+        final AirHamster airHamster = new AirHamster();
         airHamster.setStatus(Status.DEAD);
 
         person.setStatus(Status.NORMAL);
@@ -52,19 +52,19 @@ public class TextModelTest {
 
     @Test
     public void checkCannotSetPersonAction() {
-        Person personDead = new Person("Marta", 50, Status.DEAD);
-        Person personConfused = new Person("Billy", 80, Status.CONFUSED);
-        Person personHardSick = new Person("Naruto", 74, Status.HARD_SICK);
-        Person personSleep = new Person("Shin", 45, Status.SLEEP);
+        final Person personDead = new Person("Marta", 50, Status.DEAD);
+        final Person personConfused = new Person("Billy", 80, Status.CONFUSED);
+        final Person personHardSick = new Person("Naruto", 74, Status.HARD_SICK);
+        final Person personSleep = new Person("Shin", 45, Status.SLEEP);
 
         personDead.setAction("Do something");
         personConfused.setAction("Do something");
         personHardSick.setAction("Do something");
         personSleep.setAction("Do something");
 
-        String expectedActionDead = "Marta is dead";
-        String expectedActionConfused = "Billy is confused";
-        String expectedActionSleep = "Shin is sleeping";
+        final String expectedActionDead = "Marta is dead";
+        final String expectedActionConfused = "Billy is confused";
+        final String expectedActionSleep = "Shin is sleeping";
 
         Assertions.assertEquals(personDead.getAction(), expectedActionDead);
         Assertions.assertEquals(personConfused.getAction(), expectedActionConfused);
@@ -74,8 +74,8 @@ public class TextModelTest {
 
     @Test
     public void checkSetTooHeavyPersonCargo() {
-        Person person = new Person("Marta", 50, Status.NORMAL);
-        Person cargoPerson = new Person("Billy", 80, Status.NORMAL);
+        final Person person = new Person("Marta", 50, Status.NORMAL);
+        final Person cargoPerson = new Person("Billy", 80, Status.NORMAL);
 
         person.setCargo(cargoPerson);
 
@@ -84,8 +84,8 @@ public class TextModelTest {
 
     @Test
     public void checkSetIncorrectPersonWeight() {
-        Person person1 = new Person("Marta", 50, Status.NORMAL);
-        Person person2 = new Person("Billy", 80, Status.NORMAL);
+        final Person person1 = new Person("Marta", 50, Status.NORMAL);
+        final Person person2 = new Person("Billy", 80, Status.NORMAL);
 
         person1.setWeight(-5);
         person2.setWeight(0);
@@ -96,8 +96,8 @@ public class TextModelTest {
 
     @Test
     public void checkDoAirHamsterHypnosisToDeadPerson() {
-        AirHamster airHamster = new AirHamster();
-        Person personDead = new Person("Marta", 50, Status.DEAD);
+        final AirHamster airHamster = new AirHamster();
+        final Person personDead = new Person("Marta", 50, Status.DEAD);
 
         airHamster.doHypnosis(personDead);
 
@@ -106,8 +106,8 @@ public class TextModelTest {
 
     @Test
     public void checkDoAirHamsterHypnosis() {
-        AirHamster airHamster = new AirHamster();
-        Person personDead = new Person("Marta", 50, Status.NORMAL);
+        final AirHamster airHamster = new AirHamster();
+        final Person personDead = new Person("Marta", 50, Status.NORMAL);
 
         airHamster.doHypnosis(personDead);
 
@@ -116,12 +116,12 @@ public class TextModelTest {
 
     @Test
     public void checkSetAirHamsterStatus() {
-        AirHamster airHamsterToSleep = new AirHamster("Billy");
-        AirHamster airHamsterToBeConfused = new AirHamster("Jhon");
-        AirHamster airHamsterToBeDead = new AirHamster("Mike");
-        AirHamster airHamsterToBeSick = new AirHamster("Marta");
-        AirHamster airHamsterToBeHardSick = new AirHamster("Liza");
-        AirHamster airHamsterToBeNormal = new AirHamster("Lola");
+        final AirHamster airHamsterToSleep = new AirHamster("Billy");
+        final AirHamster airHamsterToBeConfused = new AirHamster("Jhon");
+        final AirHamster airHamsterToBeDead = new AirHamster("Mike");
+        final AirHamster airHamsterToBeSick = new AirHamster("Marta");
+        final AirHamster airHamsterToBeHardSick = new AirHamster("Liza");
+        final AirHamster airHamsterToBeNormal = new AirHamster("Lola");
 
         airHamsterToSleep.setStatus(Status.SLEEP);
         airHamsterToBeConfused.setStatus(Status.CONFUSED);
