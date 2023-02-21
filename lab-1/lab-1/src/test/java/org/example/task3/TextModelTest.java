@@ -38,16 +38,6 @@ public class TextModelTest {
     }
 
     @Test
-    public void checkSetTooHeavyCargo() {
-        Person person = new Person("Marta", 50, Status.NORMAL);
-        Person cargoPerson = new Person("Billy", 80, Status.NORMAL);
-
-        person.setCargo(cargoPerson);
-
-        Assertions.assertNull(person.getCargo());
-    }
-
-    @Test
     public void checkDeadObjectSetStatus() {
         Person person = new Person("Marta", 50, Status.DEAD);
         AirHamster airHamster = new AirHamster();
@@ -61,7 +51,7 @@ public class TextModelTest {
     }
 
     @Test
-    public void checkCannotSetAction() {
+    public void checkCannotSetPersonAction() {
         Person personDead = new Person("Marta", 50, Status.DEAD);
         Person personConfused = new Person("Billy", 80, Status.CONFUSED);
         Person personHardSick = new Person("Naruto", 74, Status.HARD_SICK);
@@ -83,7 +73,17 @@ public class TextModelTest {
     }
 
     @Test
-    public void checkSetIncorrectWeight() {
+    public void checkSetTooHeavyPersonCargo() {
+        Person person = new Person("Marta", 50, Status.NORMAL);
+        Person cargoPerson = new Person("Billy", 80, Status.NORMAL);
+
+        person.setCargo(cargoPerson);
+
+        Assertions.assertNull(person.getCargo());
+    }
+
+    @Test
+    public void checkSetIncorrectPersonWeight() {
         Person person1 = new Person("Marta", 50, Status.NORMAL);
         Person person2 = new Person("Billy", 80, Status.NORMAL);
 
@@ -95,7 +95,7 @@ public class TextModelTest {
     }
 
     @Test
-    public void checkDoHypnosisToDeadPerson() {
+    public void checkDoAirHamsterHypnosisToDeadPerson() {
         AirHamster airHamster = new AirHamster();
         Person personDead = new Person("Marta", 50, Status.DEAD);
 
@@ -105,13 +105,37 @@ public class TextModelTest {
     }
 
     @Test
-    public void checkDoHypnosis() {
+    public void checkDoAirHamsterHypnosis() {
         AirHamster airHamster = new AirHamster();
         Person personDead = new Person("Marta", 50, Status.NORMAL);
 
         airHamster.doHypnosis(personDead);
 
         Assertions.assertEquals(personDead.getStatus(), Status.CONFUSED);
+    }
+
+    @Test
+    public void checkSetAirHamsterStatus() {
+        AirHamster airHamsterToSleep = new AirHamster("Billy");
+        AirHamster airHamsterToBeConfused = new AirHamster("Jhon");
+        AirHamster airHamsterToBeDead = new AirHamster("Mike");
+        AirHamster airHamsterToBeSick = new AirHamster("Marta");
+        AirHamster airHamsterToBeHardSick = new AirHamster("Liza");
+        AirHamster airHamsterToBeNormal = new AirHamster("Lola");
+
+        airHamsterToSleep.setStatus(Status.SLEEP);
+        airHamsterToBeConfused.setStatus(Status.CONFUSED);
+        airHamsterToBeDead.setStatus(Status.DEAD);
+        airHamsterToBeSick.setStatus(Status.SICK);
+        airHamsterToBeHardSick.setStatus(Status.HARD_SICK);
+        airHamsterToBeNormal.setStatus(Status.NORMAL);
+
+        Assertions.assertEquals(airHamsterToSleep.getStatus(), Status.SLEEP);
+        Assertions.assertEquals(airHamsterToBeConfused.getStatus(), Status.CONFUSED);
+        Assertions.assertEquals(airHamsterToBeDead.getStatus(), Status.DEAD);
+        Assertions.assertEquals(airHamsterToBeSick.getStatus(), Status.SICK);
+        Assertions.assertEquals(airHamsterToBeHardSick.getStatus(), Status.HARD_SICK);
+        Assertions.assertEquals(airHamsterToBeNormal.getStatus(), Status.NORMAL);
     }
 
 }

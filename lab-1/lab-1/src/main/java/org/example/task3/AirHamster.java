@@ -45,6 +45,15 @@ public class AirHamster implements Flying, Alive {
             case DEAD:
                 System.out.println(getName() + " is dead. press F");
                 break;
+            case SICK:
+                System.out.println("Now " + getName() + " is sick");
+                break;
+            case HARD_SICK:
+                System.out.println("Now " + getName() + " is hard sick");
+                break;
+            case NORMAL:
+                System.out.println("Now " + getName() + " is normal");
+                break;
         }
         this.status = status;
     }
