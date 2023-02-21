@@ -5,30 +5,36 @@ public class AirHamster implements Flying, Alive {
     private String name;
 
     public AirHamster() {
+        name = "Default AirHamster";
         status = Status.NORMAL;
     }
 
-    public AirHamster(String name) {
-        this.name = name;
-        status = Status.NORMAL;
+    public AirHamster(final String name) {
+        this();
+        setName(name);
     }
 
-    public void hypnosis(Alive goal) {
-        if (goal.getStatus() == Status.DEAD) {
-            System.out.println(getName() + " can't hypnosis a dead creature");
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(final String name) {
+        if (name == null) {
             return;
         }
-        goal.setStatus(Status.CONFUSED);
-        System.out.println(getName() + " change status of " + goal.getName() + " now it's confused");
+        this.name = name;
     }
 
+    @Override
     public Status getStatus() {
         return status;
     }
 
     @Override
-    public void setStatus(Status status) {
-        if (this.status != null && this.status == Status.DEAD) {
+    public void setStatus(final Status status) {
+        if (status == null) return;
+        if (this.status == Status.DEAD) {
             System.out.println(getName() + "can't change status because it's dead");
             return;
         }
@@ -42,19 +48,32 @@ public class AirHamster implements Flying, Alive {
             case DEAD:
                 System.out.println(getName() + " is dead. press F");
                 break;
+            case SICK:
+                System.out.println("Now " + getName() + " is sick");
+                break;
+            case HARD_SICK:
+                System.out.println("Now " + getName() + " is hard sick");
+                break;
+            case NORMAL:
+                System.out.println("Now " + getName() + " is normal");
+                break;
         }
         this.status = status;
     }
 
-    @Override
-    public String getName() {
-        if (name == null) {
-            return "just an air hamster";
+    public void doHypnosis(final Alive goal) {
+        if (goal == null) return;
+        if (goal.getStatus() == Status.DEAD) {
+            System.out.println(getName() + " can't hypnosis a dead creature");
+            return;
         }
-        return name;
+        goal.setStatus(Status.CONFUSED);
+        System.out.println(getName() + " change status of " + goal.getName() + " now it's confused");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString(){
+        return "AirHamster - name: " + this.getName() + ", status: " + this.getStatus().toString() + ".";
     }
+
 }

@@ -1,9 +1,11 @@
 package org.example.task2;
 
-import java.util.Arrays;
-
 public class CountSort {
-    public static void sort(int array[], int size) {
+
+    public static void sort(int[] array) throws RuntimeException{
+        int size = array.length;
+        if (size == 0) return;
+
         int[] output = new int[size + 1];
 
         // Find the largest element of the array
@@ -15,12 +17,13 @@ public class CountSort {
         int[] count = new int[max + 1];
 
         // Initialize count array with all zeros.
-        for (int i = 0; i < max; ++i) {
+        for (int i = 0; i <= max; ++i) {
             count[i] = 0;
         }
 
         // Store the count of each element
         for (int i = 0; i < size; i++) {
+            if (array[i] < 0) throw new RuntimeException("Negative array element occurred");
             count[array[i]]++;
         }
 
@@ -37,6 +40,6 @@ public class CountSort {
         }
 
         // Copy the sorted elements into original array
-        if (size >= 0) System.arraycopy(output, 0, array, 0, size);
+        System.arraycopy(output, 0, array, 0, size);
     }
 }
