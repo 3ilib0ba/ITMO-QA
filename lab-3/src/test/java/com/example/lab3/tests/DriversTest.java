@@ -1,5 +1,6 @@
-package com.example.lab3;
+package com.example.lab3.tests;
 
+import com.example.lab3.Utils;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 

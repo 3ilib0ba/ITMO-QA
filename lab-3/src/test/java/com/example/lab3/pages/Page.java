@@ -1,0 +1,22 @@
+package com.example.lab3.pages;
+
+import org.openqa.selenium.WebDriver;
+
+public class Page {
+    protected WebDriver driver;
+
+    public Page(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
+    public String getURL() {
+        return driver.getCurrentUrl();
+    }
+}
