@@ -18,6 +18,7 @@ public class RecoverPasswordPage extends Page {
         emailInput.clear();
         emailInput.sendKeys(Utils.EMAIL);
         continueButton.click();
+        Utils.waitUntilPageLoads(driver);
         return new LogInPageMain(driver);
     }
 }

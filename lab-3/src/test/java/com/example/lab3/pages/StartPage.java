@@ -15,6 +15,7 @@ public class StartPage extends Page {
     public LogInPageSlave goToLogInPage() {
         WebElement signInHref = Utils.getElementBySelector(driver, signInBy);
         signInHref.click();
+        Utils.waitUntilPageLoads(driver);
         return new LogInPageSlave(driver);
     }
 

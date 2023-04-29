@@ -26,7 +26,6 @@ public class ChangeLanguageTest {
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                Utils.waitUntilPageLoads(webDriver);
                 logInPage.changeLanguage();
                 Assertions.assertEquals(logInPage.getSignInButtonText(), "Log in");
             }

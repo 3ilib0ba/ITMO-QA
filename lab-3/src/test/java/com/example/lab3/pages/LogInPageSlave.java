@@ -1,6 +1,7 @@
 package com.example.lab3.pages;
 
 import com.example.lab3.Utils;
+import jdk.jshell.execution.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -33,6 +34,7 @@ public class LogInPageSlave extends Page {
 
     public RecoverPasswordPage goToRecoverPasswordPage() {
         Utils.getElementBySelector(driver, forgotPasswordBy).click();
+        Utils.waitUntilPageLoads(driver);
         return new RecoverPasswordPage(driver);
     }
 
@@ -44,6 +46,7 @@ public class LogInPageSlave extends Page {
 
         WebElement englishLanguageButton = Utils.getElementBySelector(driver, englishLanguageBy);
         englishLanguageButton.click();
+        Utils.waitUntilPageLoads(driver);
     }
 
     public String getSignInButtonText() {
@@ -72,6 +75,7 @@ public class LogInPageSlave extends Page {
         driver.switchTo().defaultContent();
         signInButton.click();
 
+        Utils.waitUntilPageLoads(driver);
         return new HomePage(driver);
     }
 }

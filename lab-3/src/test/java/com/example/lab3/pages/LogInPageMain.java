@@ -32,6 +32,7 @@ public class LogInPageMain extends Page {
 
     public RecoverPasswordPage goToRecoverPasswordPage() {
         Utils.getElementBySelector(driver, forgotPasswordBy).click();
+        Utils.waitUntilPageLoads(driver);
         return new RecoverPasswordPage(driver);
     }
 
@@ -43,6 +44,7 @@ public class LogInPageMain extends Page {
 
         WebElement englishLanguageButton = Utils.getElementBySelector(driver, englishLanguageBy);
         englishLanguageButton.click();
+        Utils.waitUntilPageLoads(driver);
     }
 
     public String getSignInButtonText() {
@@ -70,6 +72,7 @@ public class LogInPageMain extends Page {
 
         driver.switchTo().defaultContent();
         signInButton.click();
+        Utils.waitUntilPageLoads(driver);
         return new HomePage(driver);
     }
 }

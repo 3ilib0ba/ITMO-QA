@@ -12,6 +12,7 @@ public class HomePage extends Page {
 
     public ProfilePage goToProfilePage() {
         Utils.getElementBySelector(driver, profileBy).click();
+        Utils.waitUntilPageLoads(driver);
         return new ProfilePage(driver);
     }
 }

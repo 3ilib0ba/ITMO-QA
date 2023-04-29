@@ -23,19 +23,14 @@ public class SignInTest {
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                Utils.waitUntilPageLoads(webDriver);
                 HomePage homePage = logInPage.validSignIn();
-                Utils.waitUntilPageLoads(webDriver);
                 ProfilePage profilePage = homePage.goToProfilePage();
-                Utils.waitUntilPageLoads(webDriver);
                 Assertions.assertEquals(profilePage.getUsername(), Utils.CORRECT_USERNAME);
             }
             catch (TimeoutException e) {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 HomePage homePage = logInPage.validSignIn();
-                Utils.waitUntilPageLoads(webDriver);
                 ProfilePage profilePage = homePage.goToProfilePage();
-                Utils.waitUntilPageLoads(webDriver);
                 Assertions.assertEquals(profilePage.getUsername(), Utils.CORRECT_USERNAME);
             }
         });
@@ -50,7 +45,6 @@ public class SignInTest {
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                Utils.waitUntilPageLoads(webDriver);
                 HomePage homePage = logInPage.invalidSignIn();
                 Assertions.assertThrows(TimeoutException.class, homePage::goToProfilePage);
             }

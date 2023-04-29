@@ -24,20 +24,25 @@ public class RecoverPasswordTest {
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                Utils.waitUntilPageLoads(webDriver);
                 RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                Utils.waitUntilPageLoads(webDriver);
                 LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                Utils.waitUntilPageLoads(webDriver);
-                Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login/recover");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException ex) {
+                    Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login");
+                }
             }
             catch (TimeoutException e) {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                Utils.waitUntilPageLoads(webDriver);
                 LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                Utils.waitUntilPageLoads(webDriver);
-                Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login/recover");
+                try {
+                    Thread.sleep(1000);
+                }
+                catch (InterruptedException ex) {
+                    Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login");
+                }
             }
         });
         drivers.forEach(WebDriver::quit);

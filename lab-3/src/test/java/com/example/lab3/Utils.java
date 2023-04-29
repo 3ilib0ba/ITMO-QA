@@ -25,10 +25,10 @@ public class Utils {
     public static final String FIREFOX_SYSTEM_PROPERTY_NAME = "webdriver.gecko.driver";
     public static final String BASE_URL = "https://ask.fm/";
 
-    public static final String CORRECT_USERNAME = "Asiya_Akuma";
-    public static final String CORRECT_PASSWORD = ".Jr@Xqfk4U3-9zz";
+    public static final String CORRECT_USERNAME = "";
+    public static final String CORRECT_PASSWORD = "";
     public static final String INCORRECT_PASSWORD = "123456";
-    public static final String EMAIL = "asiya.dragnil@mail.ru";
+    public static final String EMAIL = "";
 
     private static ChromeDriver getChromeDriver() {
         if (!System.getProperties().containsKey(CHROME_SYSTEM_PROPERTY_NAME)) {
