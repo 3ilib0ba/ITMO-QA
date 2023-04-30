@@ -29,6 +29,8 @@ public class Utils {
     public static final String CORRECT_PASSWORD = "";
     public static final String INCORRECT_PASSWORD = "123456";
     public static final String EMAIL = "";
+    public static final String DEFAULT_ANSWER = "It is default answer.";
+    public static final String DEFAULT_QUESTION = "It is default question.";
 
     private static ChromeDriver getChromeDriver() {
         if (!System.getProperties().containsKey(CHROME_SYSTEM_PROPERTY_NAME)) {

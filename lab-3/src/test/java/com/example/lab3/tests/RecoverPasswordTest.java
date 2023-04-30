@@ -26,23 +26,13 @@ public class RecoverPasswordTest {
                 LogInPageSlave logInPage = startPage.goToLogInPage();
                 RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
                 LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                try {
-                    Thread.sleep(1000);
-                }
-                catch (InterruptedException ex) {
-                    Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login");
-                }
+                Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
             }
             catch (TimeoutException e) {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
                 LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                try {
-                    Thread.sleep(1000);
-                }
-                catch (InterruptedException ex) {
-                    Assertions.assertEquals(loginPageAfterRecover.getURL(), "https://ask.fm/login");
-                }
+                Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
             }
         });
         drivers.forEach(WebDriver::quit);

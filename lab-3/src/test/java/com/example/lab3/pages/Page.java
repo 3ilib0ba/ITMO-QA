@@ -16,7 +16,4 @@ public class Page {
     public void setDriver(WebDriver driver) {
         this.driver = driver;
     }
-    public String getURL() {
-        return driver.getCurrentUrl();
-    }
 }

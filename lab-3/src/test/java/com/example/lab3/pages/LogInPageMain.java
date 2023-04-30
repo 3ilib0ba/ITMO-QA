@@ -15,6 +15,7 @@ public class LogInPageMain extends Page {
     private By signInBy = By.xpath("//*[@id=\"homeWelcomeForm\"]/div[5]/input");
     private By reCapchaFlagBy = By.xpath("//span[@aria-checked=\"true\"]");
     private By forgotPasswordBy = By.xpath("//*[@id=\"homeWelcomeForm\"]/div[4]/a");
+    private By titleBy = By.xpath("//*[@id=\"sessionNewForm\"]/div[1]/h1");
 
     private By languageBy = By.xpath("/html/body/main/footer/div/p/a");
     private By englishLanguageBy = By.xpath("/html/body/div[2]/div/section/div[2]/div/div[1]/a[8]");
@@ -49,6 +50,9 @@ public class LogInPageMain extends Page {
 
     public String getSignInButtonText() {
         return Utils.getElementBySelector(driver, signInBy).getAttribute("value");
+    }
+    public String getTitleText() {
+        return Utils.getElementBySelector(driver, titleBy).getText();
     }
 
     private HomePage trySignIn(String username, String password) {
