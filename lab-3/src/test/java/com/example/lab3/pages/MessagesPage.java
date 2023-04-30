@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 
 public class MessagesPage extends Page {
 
-    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/nav/a[1]");
-    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/nav/a[2]");
-    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/nav/a[3]");
-    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/nav/a[4]");
-    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/nav/a[5]");
+    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
+    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
 
     private By privateMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[2]");
     private By allMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[1]");
