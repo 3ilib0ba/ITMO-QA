@@ -9,6 +9,9 @@ public class AnswersPage extends Page {
     private By homePageHrefBy = By.xpath("/html/body/main/main/section[1]/nav/ol/li[1]/a");
     private By viewTopQuestionsBy = By.xpath("/html/body/main/main/section[1]/nav/ol/li[3]/a");
     private By answerTheQuestionBy = By.xpath("/html/body/main/main/section[1]/div/a");
+    private By iconLikeDisabledBy = By.xpath("//a[@class=\"icon-like\"]");
+    private By iconLikeEnabledBy = By.xpath("//a[@class=\"icon-like active\"]");
+
     public AnswersPage(WebDriver driver) {
         super(driver);
     }
@@ -35,5 +38,12 @@ public class AnswersPage extends Page {
         Utils.getElementBySelector(driver, answerTheQuestionBy);
         Utils.waitUntilPageLoads(driver);
         return new AnswerQuestionPage(driver);
+    }
+    public void likeTheAnswer() {
+        Utils.getElementBySelector(driver, iconLikeDisabledBy).click();
+    }
+
+    public void dislikeTheAnswer() {
+        Utils.getElementBySelector(driver, iconLikeEnabledBy).click();
     }
 }

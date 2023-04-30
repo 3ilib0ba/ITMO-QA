@@ -18,9 +18,11 @@ public class HomePage extends Page {
     private By viewRatingBy = By.xpath("/html/body/main/main/aside[2]/section[3]/p/a");
 
     private By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/a");
+    private By viewProfileInTopBy = By.xpath("/html/body/main/main/aside[2]/section[3]/a[1]/div[2]/span[1]");
 
     private By iconLikeDisabledBy = By.xpath("//a[@class=\"icon-like\"]");
     private By iconLikeEnabledBy = By.xpath("//a[@class=\"icon-like active\"]");
+    private By viewFiendProfileBy = By.xpath("/html/body/main/main/div/section[2]/div[2]/div/article[1]/div[1]/div[2]/div/a");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -31,23 +33,42 @@ public class HomePage extends Page {
         Utils.waitUntilPageLoads(driver);
         return new ProfilePage(driver);
     }
+    public MessagesPage goToMessagesPage() {
+        Utils.getElementBySelector(driver, messagesBy);
+        Utils.waitUntilPageLoads(driver);
+        return new MessagesPage(driver);
+    }
+    public NotificationsPage goToNotificationsPage() {
+        Utils.getElementBySelector(driver, notificationsBy);
+        Utils.waitUntilPageLoads(driver);
+        return new NotificationsPage(driver);
+    }
+    public FriendsPage goToFriendsPage() {
+        Utils.getElementBySelector(driver, friendsBy);
+        Utils.waitUntilPageLoads(driver);
+        return new FriendsPage(driver);
+    }
 
     public TopQuestionsPage goToTopQuestionsPage() {
         Utils.getElementBySelector(driver, viewTopQuestionsBy).click();
         Utils.waitUntilPageLoads(driver);
         return new TopQuestionsPage(driver);
     }
-
     public RatingPage goToRatingPage() {
         Utils.getElementBySelector(driver, viewRatingBy);
         Utils.waitUntilPageLoads(driver);
         return new RatingPage(driver);
     }
 
-    public AnswersPage goToAnswersPage() {
+    public AnswersPage goToAnswersInTopPage() {
         Utils.getElementBySelector(driver, viewAnswersInTopBy);
         Utils.waitUntilPageLoads(driver);
         return new AnswersPage(driver);
+    }
+    public ProfilePage goToProfileInTop() {
+        Utils.getElementBySelector(driver, viewProfileInTopBy);
+        Utils.waitUntilPageLoads(driver);
+        return new ProfilePage(driver);
     }
 
     public void askAround() {
@@ -58,12 +79,15 @@ public class HomePage extends Page {
         questionInput.sendKeys(Utils.DEFAULT_QUESTION);
         sendQuestionButton.click();
     }
-
     public void likeTheAnswer() {
         Utils.getElementBySelector(driver, iconLikeDisabledBy).click();
     }
-
     public void dislikeTheAnswer() {
         Utils.getElementBySelector(driver, iconLikeEnabledBy).click();
+    }
+    public ProfilePage goToFriendProfile() {
+        Utils.getElementBySelector(driver, viewFiendProfileBy);
+        Utils.waitUntilPageLoads(driver);
+        return new ProfilePage(driver);
     }
 }
