@@ -17,13 +17,13 @@ public class CountriesPage extends Page {
     }
 
     public HomePage goToHomePage() {
-        Utils.getElementBySelector(driver, homePageHrefBy);
+        Utils.getElementBySelector(driver, homePageHrefBy).click();
         Utils.waitUntilPageLoads(driver);
         return new HomePage(driver);
     }
 
     public TopQuestionsPage goToTopQuestionsPage() {
-        Utils.getElementBySelector(driver, unitedKingdomBy);
+        Utils.getElementBySelector(driver, unitedKingdomBy).click();
         Utils.waitUntilPageLoads(driver);
         return new TopQuestionsPage(driver);
     }

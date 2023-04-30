@@ -20,13 +20,13 @@ public class TopQuestionsPage extends Page {
     }
 
     public CountriesPage goToCountiesPage() {
-        Utils.getElementBySelector(driver, viewByCountriesBy);
+        Utils.getElementBySelector(driver, viewByCountriesBy).click();
         Utils.waitUntilPageLoads(driver);
         return new CountriesPage(driver);
     }
 
     public AnswersPage goToAnswers() {
-        Utils.getElementBySelector(driver, viewAnswersBy);
+        Utils.getElementBySelector(driver, viewAnswersBy).click();
         Utils.waitUntilPageLoads(driver);
         return new AnswersPage(driver);
     }

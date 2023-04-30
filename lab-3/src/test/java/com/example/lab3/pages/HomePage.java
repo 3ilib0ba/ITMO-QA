@@ -34,17 +34,17 @@ public class HomePage extends Page {
         return new ProfilePage(driver);
     }
     public MessagesPage goToMessagesPage() {
-        Utils.getElementBySelector(driver, messagesBy);
+        Utils.getElementBySelector(driver, messagesBy).click();
         Utils.waitUntilPageLoads(driver);
         return new MessagesPage(driver);
     }
     public NotificationsPage goToNotificationsPage() {
-        Utils.getElementBySelector(driver, notificationsBy);
+        Utils.getElementBySelector(driver, notificationsBy).click();
         Utils.waitUntilPageLoads(driver);
         return new NotificationsPage(driver);
     }
     public FriendsPage goToFriendsPage() {
-        Utils.getElementBySelector(driver, friendsBy);
+        Utils.getElementBySelector(driver, friendsBy).click();
         Utils.waitUntilPageLoads(driver);
         return new FriendsPage(driver);
     }
@@ -55,18 +55,18 @@ public class HomePage extends Page {
         return new TopQuestionsPage(driver);
     }
     public RatingPage goToRatingPage() {
-        Utils.getElementBySelector(driver, viewRatingBy);
+        Utils.getElementBySelector(driver, viewRatingBy).click();
         Utils.waitUntilPageLoads(driver);
         return new RatingPage(driver);
     }
 
     public AnswersPage goToAnswersInTopPage() {
-        Utils.getElementBySelector(driver, viewAnswersInTopBy);
+        Utils.getElementBySelector(driver, viewAnswersInTopBy).click();
         Utils.waitUntilPageLoads(driver);
         return new AnswersPage(driver);
     }
     public ProfilePage goToProfileInTop() {
-        Utils.getElementBySelector(driver, viewProfileInTopBy);
+        Utils.getElementBySelector(driver, viewProfileInTopBy).click();
         Utils.waitUntilPageLoads(driver);
         return new ProfilePage(driver);
     }
@@ -86,7 +86,7 @@ public class HomePage extends Page {
         Utils.getElementBySelector(driver, iconLikeEnabledBy).click();
     }
     public ProfilePage goToFriendProfile() {
-        Utils.getElementBySelector(driver, viewFiendProfileBy);
+        Utils.getElementBySelector(driver, viewFiendProfileBy).click();
         Utils.waitUntilPageLoads(driver);
         return new ProfilePage(driver);
     }

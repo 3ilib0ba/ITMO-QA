@@ -16,7 +16,7 @@ public class RatingPage extends Page {
     }
 
     public ProfilePage goToProfilePage() {
-        Utils.getElementBySelector(driver, ratingProfileBy);
+        Utils.getElementBySelector(driver, ratingProfileBy).click();
         Utils.waitUntilPageLoads(driver);
         return new ProfilePage(driver);
     }

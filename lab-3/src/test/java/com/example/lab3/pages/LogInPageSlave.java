@@ -65,7 +65,7 @@ public class LogInPageSlave extends Page {
         passwordInput.sendKeys(password);
         signInButton.click();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(
                 By.xpath("//iframe[starts-with(@name, 'a-') and starts-with(@src, 'https://www.google.com/recaptcha')]")
         ));
