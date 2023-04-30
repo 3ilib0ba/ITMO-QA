@@ -1,4 +1,4 @@
-package com.example.lab3.tests;
+package com.example.lab3.tests.usecases;
 
 import com.example.lab3.Utils;
 import com.example.lab3.pages.*;

@@ -1,4 +1,4 @@
-package com.example.lab3.tests;
+package com.example.lab3.tests.usecases;
 
 import com.example.lab3.Utils;
 import com.example.lab3.pages.*;
@@ -10,30 +10,28 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class RecoverPasswordTest {
+public class ViewRatingTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
-
     @Test
-    public void recoverPasswordTest() {
+    public void viewRatingTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
+            HomePage homePage;
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
+                homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
-                RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
-                Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
+                homePage = logInPage.validSignIn();
             }
+            RatingPage ratingPage = homePage.goToRatingPage();
+            Assertions.assertEquals(ratingPage.getTitleText(), "Еженедельный \uD83C\uDDF7\uD83C\uDDFA рейтинг");
         });
         drivers.forEach(WebDriver::quit);
     }

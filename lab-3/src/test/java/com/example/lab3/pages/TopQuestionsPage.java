@@ -8,6 +8,7 @@ public class TopQuestionsPage extends Page {
     private By viewAnswersBy = By.xpath("/html/body/main/main/div/div/div/article[1]/a[2]");
     private By viewByCountriesBy = By.xpath("/html/body/main/main/div/div/div/article[1]/a[2]");
     private By homePageHrefBy = By.xpath("/html/body/main/main/section[1]/nav/ol/li[1]/a");
+    private By titleBy = By.xpath("/html/body/main/main/section[1]/h1");
 
     public TopQuestionsPage(WebDriver driver) {
         super(driver);
@@ -29,5 +30,9 @@ public class TopQuestionsPage extends Page {
         Utils.getElementBySelector(driver, viewAnswersBy).click();
         Utils.waitUntilPageLoads(driver);
         return new AnswersPage(driver);
+    }
+
+    public String getTitleText() {
+        return Utils.getElementBySelector(driver, titleBy).getText();
     }
 }
