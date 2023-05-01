@@ -14,6 +14,7 @@ public class MessagesPage extends Page {
     private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
     private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
 
+
     private By privateMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[2]");
     private By allMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[1]");
 
