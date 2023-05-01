@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class MessagesPage extends Page {
 
+    // HEADER
     private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
     private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
     private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
@@ -17,10 +18,12 @@ public class MessagesPage extends Page {
     private By allMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[1]");
 
 
+    // MAIN PAGE
     private By getMoreOptionsOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div[1]/article[1]/div[2]/div[2]/div/a");
     private By deleteMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[2]/div/nav/a[1]");
     private By questionFromOneOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[1]/a[2]");
 
+    // RIGHT SIDE BAR
     private By questionFromRightSideBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/h4/a");
     private By firstFriendFromRightSideBy = By.xpath("/html/body/main/main/aside[2]/section[2]/div[1]/a[2]");
 
