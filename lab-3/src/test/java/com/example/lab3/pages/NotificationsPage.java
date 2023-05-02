@@ -26,7 +26,6 @@ public class NotificationsPage extends Page {
     // QUESTION, ANSWER, LIKE
     private By questionHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a");
     private By answerHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[2]");
-    private By likeHrefBy = By.xpath("");
 
     public NotificationsPage(WebDriver driver) {
         super(driver);
@@ -86,10 +85,10 @@ public class NotificationsPage extends Page {
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Лайки"));
     }
 
-    public AnswerQuestionPage goToQuestion() {
+    public QuestionPage goToQuestion() {
         Utils.getElementBySelector(driver, questionHrefBy).click();
         Utils.waitUntilPageLoads(driver);
-        return new AnswerQuestionPage(driver);
+        return new QuestionPage(driver);
     }
 
     public ProfilePage goToAnswer() {

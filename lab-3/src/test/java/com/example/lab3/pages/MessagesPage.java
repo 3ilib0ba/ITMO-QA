@@ -1,7 +1,6 @@
 package com.example.lab3.pages;
 
 import com.example.lab3.Utils;
-import com.sun.tools.javac.Main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -89,10 +88,10 @@ public class MessagesPage extends Page {
         Utils.waitUntilPageLoads(driver);
     }
 
-    public AnswerQuestionPage goToQuestionFromMessages() {
+    public QuestionPage goToQuestionFromMessages() {
         Utils.getElementBySelector(driver, questionFromOneOfMessageBy).click();
         Utils.waitUntilPageLoads(driver);
-        return new AnswerQuestionPage(driver);
+        return new QuestionPage(driver);
     }
 
     public AnswersPage goToAnswersInTop() {
@@ -128,6 +127,13 @@ public class MessagesPage extends Page {
         return Utils.getElementBySelector(
                 driver,
                 By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[1]/a[1]")
+        ).getText();
+    }
+
+    public String getTitle() {
+        return Utils.getElementBySelector(
+                driver,
+                By.xpath("/html/body/main/main/div/div/section/header/h1")
         ).getText();
     }
 }

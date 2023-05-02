@@ -1,10 +1,14 @@
 package com.example.lab3.pages;
 
+import com.beust.ah.A;
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfilePage extends Page {
     // HEADER
@@ -100,6 +104,18 @@ public class ProfilePage extends Page {
     public String getNickName() {
         return Utils.getElementBySelector(
                 driver, By.xpath("/html/body/main/main/section[1]/header/div/h1/span")).getText();
+    }
+
+    public ArrayList<String> getInterests() {
+        ArrayList<String> interests = new ArrayList<>();
+        WebElement list = Utils.getElementBySelector(
+                driver, By.xpath("/html/body/main/main/aside[1]/section/div/div/ul")
+        );
+        List<WebElement> links = list.findElements(By.tagName("li"));
+        for (int i = 0; i < links.size(); i++) {
+            interests.add(links.get(i).getText().substring(1));
+        }
+        return interests;
     }
 
     public Boolean isAnswerLiked() {

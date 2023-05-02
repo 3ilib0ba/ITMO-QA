@@ -3,7 +3,6 @@ package com.example.lab3.pages;
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class AnswersPage extends Page {
     private By viewByCountriesBy = By.xpath("/html/body/main/main/section[1]/nav/ol/li[2]/a");
@@ -35,10 +34,10 @@ public class AnswersPage extends Page {
         return new TopQuestionsPage(driver);
     }
 
-    public AnswerQuestionPage goToAnswerQuestionPage() {
+    public QuestionPage goToAnswerQuestionPage() {
         Utils.getElementBySelector(driver, answerTheQuestionBy).click();
         Utils.waitUntilPageLoads(driver);
-        return new AnswerQuestionPage(driver);
+        return new QuestionPage(driver);
     }
     public void likeTheAnswer() {
         Utils.getElementBySelector(driver, iconLikeDisabledBy).click();

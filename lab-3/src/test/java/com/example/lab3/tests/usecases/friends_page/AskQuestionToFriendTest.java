@@ -1,4 +1,4 @@
-package com.example.lab3.tests.usecases.messages_page;
+package com.example.lab3.tests.usecases.friends_page;
 
 import com.example.lab3.Utils;
 import com.example.lab3.pages.*;
@@ -10,13 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewFriendsTest {
+public class AskQuestionToFriendTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewPrivateMessagesTest() {
+    public void askQuestionToFriendTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -30,10 +30,11 @@ public class ViewFriendsTest {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
-            messagesPage.rejectNotification();
-            FriendsPage friendsPage = messagesPage.goToFriendsPage();
-            Assertions.assertEquals(friendsPage.getTitleText(), "Ваши друзья");
+            FriendsPage friendsPage = homePage.goToFriendsPage();
+            String friendUsername = friendsPage.getFirstFriendUsername();
+            QuestionPage questionPage = friendsPage.goToQuestionToFriend();
+            ProfilePage profilePage = questionPage.askQuestion();
+            Assertions.assertEquals(friendUsername, profilePage.getNickName());
         });
         drivers.forEach(WebDriver::quit);
     }

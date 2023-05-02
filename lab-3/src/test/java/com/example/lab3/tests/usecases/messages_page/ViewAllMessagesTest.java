@@ -1,4 +1,4 @@
-package com.example.lab3.tests.usecases;
+package com.example.lab3.tests.usecases.messages_page;
 
 import com.example.lab3.Utils;
 import com.example.lab3.pages.*;
@@ -10,13 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class AnswerQuestionTest {
+public class ViewAllMessagesTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void answerQuestionFromMessagesPageTest() {
+    public void viewAllMessagesTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -32,17 +32,13 @@ public class AnswerQuestionTest {
             }
             MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            String firstQuestionTextBefore = messagesPage.getFirstQuestionText();
-            QuestionPage questionPage = messagesPage.goToQuestionFromMessages();
-            questionPage.answerTheQuestion();
-            String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
-            Assertions.assertNotEquals(firstQuestionTextBefore, firstQuestionTextAfter);
+            Assertions.assertEquals(messagesPage.getTitle(), "Вопросы");
         });
         drivers.forEach(WebDriver::quit);
     }
 
     @Test
-    public void answerQuestionFromNotificationsPageTest() {
+    public void viewAllMessagesViewInLoopTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -56,14 +52,10 @@ public class AnswerQuestionTest {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            NotificationsPage notificationsPage = homePage.goToNotificationsPage();
-            notificationsPage.changeWindowToQuestionsTheme();
-            String firstQuestionTextBefore = notificationsPage.getFirstQuestionText();
-            QuestionPage questionPage = notificationsPage.goToQuestion();
-            MessagesPage messagesPage = questionPage.answerTheQuestion();
+            MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
-            Assertions.assertNotEquals(firstQuestionTextBefore, firstQuestionTextAfter);
+            messagesPage.showAllMessages();
+            Assertions.assertEquals(messagesPage.getTitle(), "Вопросы");
         });
         drivers.forEach(WebDriver::quit);
     }
