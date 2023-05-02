@@ -10,36 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewTopQuestionsTest {
+public class AnswerQuestionTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
-
     @Test
-    public void viewTopQuestionsFromHomePageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
-        drivers.parallelStream().forEach(webDriver -> {
-            webDriver.get(Utils.BASE_URL);
-            HomePage homePage;
-            try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
-                homePage = logInPage.validSignIn();
-            }
-            catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
-                homePage = logInPage.validSignIn();
-            }
-            TopQuestionsPage topQuestionsPage = homePage.goToTopQuestionsPage();
-            Assertions.assertEquals(topQuestionsPage.getTitleText(),
-                    "\uD83C\uDDF7\uD83C\uDDFA\n" + "Россия\n" + "- О чем спрашивают люди");
-        });
-        drivers.forEach(WebDriver::quit);
-    }
-
-    @Test
-    public void viewTopQuestionsFromMessagesPageTest() {
+    public void answerQuestionFromMessagesPageTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -55,9 +32,38 @@ public class ViewTopQuestionsTest {
             }
             MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            TopQuestionsPage topQuestionsPage = messagesPage.goToTopQuestionsPage();
-            Assertions.assertEquals(topQuestionsPage.getTitleText(),
-                    "\uD83C\uDDF7\uD83C\uDDFA\n" + "Россия\n" + "- О чем спрашивают люди");
+            String firstQuestionTextBefore = messagesPage.getFirstQuestionText();
+            AnswerQuestionPage answerQuestionPage = messagesPage.goToQuestionFromMessages();
+            answerQuestionPage.answerTheQuestion();
+            String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
+            Assertions.assertNotEquals(firstQuestionTextBefore, firstQuestionTextAfter);
+        });
+        drivers.forEach(WebDriver::quit);
+    }
+
+    @Test
+    public void answerQuestionFromNotificationsPageTest() {
+        List<WebDriver> drivers = Utils.getDrivers();
+        drivers.parallelStream().forEach(webDriver -> {
+            webDriver.get(Utils.BASE_URL);
+            HomePage homePage;
+            try {
+                StartPage startPage = new StartPage(webDriver);
+                LogInPageSlave logInPage = startPage.goToLogInPage();
+                homePage = logInPage.validSignIn();
+            }
+            catch (TimeoutException e) {
+                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                homePage = logInPage.validSignIn();
+            }
+            NotificationsPage notificationsPage = homePage.goToNotificationsPage();
+            notificationsPage.changeWindowToQuestionsTheme();
+            String firstQuestionTextBefore = notificationsPage.getFirstQuestionText();
+            AnswerQuestionPage answerQuestionPage = notificationsPage.goToQuestion();
+            MessagesPage messagesPage = answerQuestionPage.answerTheQuestion();
+            messagesPage.rejectNotification();
+            String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
+            Assertions.assertNotEquals(firstQuestionTextBefore, firstQuestionTextAfter);
         });
         drivers.forEach(WebDriver::quit);
     }

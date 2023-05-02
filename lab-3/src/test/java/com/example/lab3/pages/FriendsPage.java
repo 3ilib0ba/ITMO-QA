@@ -23,6 +23,9 @@ public class FriendsPage extends Page {
     private By inputFriendSearch = By.xpath("/html/body/main/main/div/div/section/form/div[1]/label/input");
     private By buttonForSearch = By.xpath("/html/body/main/main/div/div/section/form/div[1]/label");
 
+
+    private By friendsTitle = By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[1]/h2");
+
     public FriendsPage(WebDriver driver) {
         super(driver);
     }
@@ -79,4 +82,7 @@ public class FriendsPage extends Page {
         Utils.waitUntilPageLoads(driver);
     }
 
+    public String getTitleText() {
+        return Utils.getElementBySelector(driver, friendsTitle).getText();
+    }
 }

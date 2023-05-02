@@ -3,6 +3,10 @@ package com.example.lab3.pages;
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class NotificationsPage extends Page {
 
@@ -57,22 +61,29 @@ public class NotificationsPage extends Page {
 
     public void changeWindowToAllThemes() {
         Utils.getElementBySelector(driver, navigationToAllThemes).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Все"));
     }
-
     public void changeWindowToQuestionsTheme() {
         Utils.getElementBySelector(driver, navigationToQuestionsTheme).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Вопросы"));
     }
 
     public void changeWindowToAnswerTheme() {
         Utils.getElementBySelector(driver, navigationToAnswersTheme).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Ответы"));
     }
 
     public void changeWindowToLikesTheme() {
         Utils.getElementBySelector(driver, navigationToLikesTheme).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Лайки"));
     }
 
     public AnswerQuestionPage goToQuestion() {
@@ -81,10 +92,29 @@ public class NotificationsPage extends Page {
         return new AnswerQuestionPage(driver);
     }
 
-    public AnswersPage goToAnswer() {
+    public ProfilePage goToAnswer() {
         Utils.getElementBySelector(driver, answerHrefBy).click();
         Utils.waitUntilPageLoads(driver);
-        return new AnswersPage(driver);
+        return new ProfilePage(driver);
     }
 
+    public String getPressedNavigationText() {
+        return Utils.getElementBySelector(
+                driver,
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]")
+        ).getText();
+    }
+
+    public String getFirstQuestionText() {
+        return Utils.getElementBySelector(
+                driver,
+                By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a")
+        ).getText();
+    }
+
+    public String getFirstAnswererNickName() {
+        return Utils.getElementBySelector(
+                driver, By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[2]/strong[1]")
+        ).getText();
+    }
 }

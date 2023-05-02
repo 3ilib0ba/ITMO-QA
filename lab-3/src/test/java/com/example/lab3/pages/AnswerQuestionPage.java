@@ -12,13 +12,14 @@ public class AnswerQuestionPage extends Page {
         super(driver);
     }
 
-    public AnswersPage answerTheQuestion() {
+    public MessagesPage answerTheQuestion() {
         WebElement inputAnswer = Utils.getElementBySelector(driver, answerBy);
         WebElement sendAnswerButton = Utils.getElementBySelector(driver, sendAnswerBy);
 
         inputAnswer.clear();
         inputAnswer.sendKeys(Utils.DEFAULT_ANSWER);
         sendAnswerButton.click();
-        return new AnswersPage(driver);
+        Utils.waitUntilPageLoads(driver);
+        return new MessagesPage(driver);
     }
 }

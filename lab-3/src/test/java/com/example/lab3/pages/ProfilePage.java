@@ -2,6 +2,7 @@ package com.example.lab3.pages;
 
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +13,6 @@ public class ProfilePage extends Page {
     private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
     private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
     private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
-
     private By askYourselfArea = By.xpath("//*[@id=\"question_question_text\"]");
     private By askYourselfButton = By.xpath("//*[@id=\"profileAnswersForm\"]/div[2]/button");
 
@@ -87,5 +87,26 @@ public class ProfilePage extends Page {
         Utils.getElementBySelector(driver, editProfileHref).click();
         Utils.waitUntilPageLoads(driver);
         return new Page(driver);
+    }
+
+    public void likeAnswer() {
+        WebElement like = Utils.getElementBySelector(
+                driver, By.xpath("/html/body/main/main/div/article/div[3]/div[1]/a[1]"));
+        if (like.getAttribute("class").equals("icon-like")) {
+            like.click();
+        }
+    }
+
+    public String getNickName() {
+        return Utils.getElementBySelector(
+                driver, By.xpath("/html/body/main/main/section[1]/header/div/h1/span")).getText();
+    }
+
+    public Boolean isAnswerLiked() {
+        WebElement like = Utils.getElementBySelector(
+                driver, By.xpath("/html/body/main/main/div/article/div[3]/div[1]/a[1]")
+        );
+        if (like.getAttribute("class").equals("icon-like active")) return Boolean.TRUE;
+        else return Boolean.FALSE;
     }
 }
