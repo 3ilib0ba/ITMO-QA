@@ -25,10 +25,6 @@ public class HomePage extends Page {
     private By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/a");
     private By viewProfileInTopBy = By.xpath("/html/body/main/main/aside[2]/section[3]/a[1]/div[2]/span[1]");
 
-    private By iconLikeDisabledBy = By.xpath("//a[@class=\"icon-like\"]");
-    private By iconLikeEnabledBy = By.xpath("//a[@class=\"icon-like active\"]");
-    private By viewFiendProfileBy = By.xpath("/html/body/main/main/div/section[2]/div[2]/div/article[1]/div[1]/div[2]/div/a");
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -90,16 +86,5 @@ public class HomePage extends Page {
     }
     public Integer getAmountOfCharacters() {
         return Integer.parseInt(Utils.getElementBySelector(driver, amountOfCharactersBy).getText());
-    }
-    public void likeTheAnswer() {
-        Utils.getElementBySelector(driver, iconLikeDisabledBy).click();
-    }
-    public void dislikeTheAnswer() {
-        Utils.getElementBySelector(driver, iconLikeEnabledBy).click();
-    }
-    public ProfilePage goToFriendProfile() {
-        Utils.getElementBySelector(driver, viewFiendProfileBy).click();
-        Utils.waitUntilPageLoads(driver);
-        return new ProfilePage(driver);
     }
 }

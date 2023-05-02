@@ -1,4 +1,4 @@
-package com.example.lab3.tests.usecases.notifications_page;
+package com.example.lab3.tests.usecases.profile_page;
 
 import com.example.lab3.Utils;
 import com.example.lab3.pages.*;
@@ -10,13 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewAnswersTest {
+public class ViewEditingPageTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewAnswersTest() {
+    public void viewEditingPageTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -30,9 +30,9 @@ public class ViewAnswersTest {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            NotificationsPage notificationsPage = homePage.goToNotificationsPage();
-            notificationsPage.changeWindowToAnswerTheme();
-            Assertions.assertEquals(notificationsPage.getPressedNavigationText(), "Ответы");
+            ProfilePage profilePage = homePage.goToProfilePage();
+            profilePage.goToEditingProfilePage();
+            Assertions.assertEquals(webDriver.getCurrentUrl(), "https://ask.fm/account/settings/profile");
         });
         drivers.forEach(WebDriver::quit);
     }

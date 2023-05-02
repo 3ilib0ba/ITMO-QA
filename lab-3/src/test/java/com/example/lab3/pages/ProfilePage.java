@@ -6,7 +6,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,17 +68,23 @@ public class ProfilePage extends Page {
 
     public void changeBarToAnswers() {
         Utils.getElementBySelector(driver, answersBar).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Ответы"));
     }
 
     public void changeBarToQuestions() {
         Utils.getElementBySelector(driver, questionsBar).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Вопросы"));
     }
 
     public void changeBarToVersuses() {
         Utils.getElementBySelector(driver, versusesBar).click();
-        Utils.waitUntilPageLoads(driver);
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        driverWait.until(ExpectedConditions.textToBe(
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Версус"));
     }
 
     public void askYourself(String question) {
@@ -124,5 +133,12 @@ public class ProfilePage extends Page {
         );
         if (like.getAttribute("class").equals("icon-like active")) return Boolean.TRUE;
         else return Boolean.FALSE;
+    }
+
+    public String getPressedNavigationText() {
+        return Utils.getElementBySelector(
+                driver,
+                By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]")
+        ).getText();
     }
 }

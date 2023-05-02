@@ -32,7 +32,6 @@ public class MessagesPage extends Page {
 
     // RIGHT SIDE BAR
     private By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/h4/a");
-    private By firstFriendFromRightSideBy = By.xpath("/html/body/main/main/aside[2]/section[2]/div[1]/a[2]");
     private By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
 
     public MessagesPage(WebDriver driver) {
@@ -100,11 +99,6 @@ public class MessagesPage extends Page {
         return new AnswersPage(driver);
     }
 
-    public ProfilePage goToFriendFromRightSide() {
-        Utils.getElementBySelector(driver, firstFriendFromRightSideBy).click();
-        Utils.waitUntilPageLoads(driver);
-        return new ProfilePage(driver);
-    }
     public TopQuestionsPage goToTopQuestionsPage() {
         Utils.getElementBySelector(driver, viewTopQuestionsBy).click();
         Utils.waitUntilPageLoads(driver);
