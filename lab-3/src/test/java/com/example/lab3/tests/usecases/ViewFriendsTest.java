@@ -10,71 +10,71 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewFriendsTest {
+class ViewFriendsTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewFriendsFromMessagesPageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewFriendsFromMessagesPageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            FriendsPage friendsPage = messagesPage.goToFriendsPage();
+            final FriendsPage friendsPage = messagesPage.goToFriendsPage();
             Assertions.assertEquals(friendsPage.getTitleText(), "Ваши друзья");
         });
         drivers.forEach(WebDriver::quit);
     }
 
     @Test
-    public void viewFriendsFromFriendsPageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewFriendsFromFriendsPageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            FriendsPage friendsPage = homePage.goToFriendsPage();
+            final FriendsPage friendsPage = homePage.goToFriendsPage();
             Assertions.assertEquals(friendsPage.getTitleText(), "Ваши друзья");
         });
         drivers.forEach(WebDriver::quit);
     }
 
     @Test
-    public void viewFriendsViewInLoopFromFriendsPageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewFriendsViewInLoopFromFriendsPageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            FriendsPage friendsPage = homePage.goToFriendsPage();
+            final FriendsPage friendsPage = homePage.goToFriendsPage();
             friendsPage.changeBarStateToFriends();
             Assertions.assertEquals(friendsPage.getPressedNavigationText(), "Друзья");
         });

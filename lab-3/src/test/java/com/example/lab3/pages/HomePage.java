@@ -10,22 +10,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class HomePage extends Page {
-    private By profileBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
-    private By messagesBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
-    private By notificationsBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
-    private By friendsBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private final By profileBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
+    private final By messagesBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private final By notificationsBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private final By friendsBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
 
-    private By askAroundBy = By.xpath("//*[@id=\"question_question_text\"]");
-    private By sendQuestionBy = By.xpath("//*[@id=\"wallIndexForm\"]/div[2]/button");
-    private By amountOfCharactersBy = By.xpath("//*[@id=\"wallIndexForm\"]/div[2]/div[2]");
+    private final By askAroundBy = By.xpath("//*[@id=\"question_question_text\"]");
+    private final By sendQuestionBy = By.xpath("//*[@id=\"wallIndexForm\"]/div[2]/button");
+    private final By amountOfCharactersBy = By.xpath("//*[@id=\"wallIndexForm\"]/div[2]/div[2]");
 
-    private By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
-    private By viewRatingBy = By.xpath("/html/body/main/main/aside[2]/section[3]/p/a");
+    private final By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
+    private final By viewRatingBy = By.xpath("/html/body/main/main/aside[2]/section[3]/p/a");
 
-    private By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/a");
-    private By viewProfileInTopBy = By.xpath("/html/body/main/main/aside[2]/section[3]/a[1]/div[2]/span[1]");
+    private final By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/a");
+    private final By viewProfileInTopBy = By.xpath("/html/body/main/main/aside[2]/section[3]/a[1]/div[2]/span[1]");
 
-    public HomePage(WebDriver driver) {
+    public HomePage(final WebDriver driver) {
         super(driver);
     }
 
@@ -73,15 +73,15 @@ public class HomePage extends Page {
     }
 
     public void askAround() {
-        WebElement questionInput = Utils.getElementBySelector(driver, askAroundBy);
-        WebElement sendQuestionButton = Utils.getElementBySelector(driver, sendQuestionBy);
-        WebElement amountOfCharactersElem = Utils.getElementBySelector(driver, amountOfCharactersBy);
-        String defaultText = amountOfCharactersElem.getText();
+        final WebElement questionInput = Utils.getElementBySelector(driver, askAroundBy);
+        final WebElement sendQuestionButton = Utils.getElementBySelector(driver, sendQuestionBy);
+        final WebElement amountOfCharactersElem = Utils.getElementBySelector(driver, amountOfCharactersBy);
+        final String defaultText = amountOfCharactersElem.getText();
 
         questionInput.clear();
         questionInput.sendKeys(Utils.DEFAULT_QUESTION);
         sendQuestionButton.click();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
         wait.until(ExpectedConditions.textToBe(amountOfCharactersBy, defaultText));
     }
     public Integer getAmountOfCharacters() {

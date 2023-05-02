@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewSocialMediasTest {
+class ViewSocialMediasTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewSocialMediasTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewSocialMediasTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            FriendsPage friendsPage = homePage.goToFriendsPage();
+            final FriendsPage friendsPage = homePage.goToFriendsPage();
             friendsPage.changeBarStateToSocialMedias();
             Assertions.assertEquals(friendsPage.getPressedNavigationText(), "Социальные сети");
         });

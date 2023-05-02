@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class StartPage extends Page {
-    private By signInBy = By.xpath("//*[@id=\"homeWelcomeForm\"]/p/a");
+    private final By signInBy = By.xpath("//*[@id=\"homeWelcomeForm\"]/p/a");
 
-    public StartPage(WebDriver driver) {
+    public StartPage(final WebDriver driver) {
         super(driver);
     }
 
     public LogInPageSlave goToLogInPage() {
-        WebElement signInHref = Utils.getElementBySelector(driver, signInBy);
+        final WebElement signInHref = Utils.getElementBySelector(driver, signInBy);
         signInHref.click();
         Utils.waitUntilPageLoads(driver);
         return new LogInPageSlave(driver);

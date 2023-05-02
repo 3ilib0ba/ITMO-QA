@@ -13,24 +13,24 @@ import java.time.Duration;
 public class FriendsPage extends Page {
 
     // HEADER
-    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
-    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
-    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
-    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
-    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
+    private final By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
+    private final By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private final By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private final By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private final By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
 
     // NAVIGATION BAR(FRIENDS, INTERESTS)
-    private By friendsBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[1]");
-    private By interestsBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[2]");
-    private By socialMediasBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[3]");
+    private final By friendsBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[1]");
+    private final By interestsBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[2]");
+    private final By socialMediasBar = By.xpath("/html/body/main/main/div/div/section/header/nav/a[3]");
 
-    private By askFriendButton = By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[2]/div[1]/div/a[2]");
+    private final By askFriendButton = By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[2]/div[1]/div/a[2]");
 
-    private By inputFriendSearch = By.xpath("/html/body/main/main/div/div/section/form/div[1]/label/input");
+    private final By inputFriendSearch = By.xpath("/html/body/main/main/div/div/section/form/div[1]/label/input");
 
-    private By friendsTitle = By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[1]/h2");
+    private final By friendsTitle = By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[1]/h2");
 
-    public FriendsPage(WebDriver driver) {
+    public FriendsPage(final WebDriver driver) {
         super(driver);
     }
 
@@ -63,21 +63,21 @@ public class FriendsPage extends Page {
 
     public void changeBarStateToFriends() {
         Utils.getElementBySelector(driver, friendsBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Друзья"));
     }
 
     public void changeBarStateToInterests() {
         Utils.getElementBySelector(driver, interestsBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Интересы"));
     }
 
     public void changeBarStateToSocialMedias() {
         Utils.getElementBySelector(driver, socialMediasBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Социальные сети"));
     }
@@ -88,25 +88,25 @@ public class FriendsPage extends Page {
         return new QuestionPage(driver);
     }
 
-    public void searchFriend(String name) {
-        WebElement searchInput = Utils.getElementBySelector(driver, inputFriendSearch);
+    public void searchFriend(final String name) {
+        final WebElement searchInput = Utils.getElementBySelector(driver, inputFriendSearch);
         searchInput.clear();
         searchInput.sendKeys(name);
 
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[1]/h2"), "Результат поиска"));
     }
 
-    public void searchByInterests(String interest) {
-        WebElement searchInput = Utils.getElementBySelector(
+    public void searchByInterests(final String interest) {
+        final WebElement searchInput = Utils.getElementBySelector(
                 driver,
                 By.xpath("/html/body/main/main/div/div/section/form/div[1]/label/input[1]"));
         searchInput.clear();
         searchInput.sendKeys(interest);
         searchInput.sendKeys(Keys.RETURN);
 
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("/html/body/main/main/div/div/section/form/div[2]/div[1]/h2"), "Результат поиска"));
     }

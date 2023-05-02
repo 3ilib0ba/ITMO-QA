@@ -10,31 +10,31 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class DeleteQuestionTest {
+class DeleteQuestionTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void deleteQuestionTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void deleteQuestionTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            String firstQuestionTextBefore = messagesPage.getFirstQuestionText();
+            final String firstQuestionTextBefore = messagesPage.getFirstQuestionText();
             messagesPage.deleteMessage();
-            String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
+            final String firstQuestionTextAfter = messagesPage.getFirstQuestionText();
             Assertions.assertNotEquals(firstQuestionTextBefore, firstQuestionTextAfter);
         });
         drivers.forEach(WebDriver::quit);

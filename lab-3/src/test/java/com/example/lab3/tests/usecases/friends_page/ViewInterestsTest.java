@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewInterestsTest {
+class ViewInterestsTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewInterestsTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewInterestsTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            FriendsPage friendsPage = homePage.goToFriendsPage();
+            final FriendsPage friendsPage = homePage.goToFriendsPage();
             friendsPage.changeBarStateToInterests();
             Assertions.assertEquals(friendsPage.getPressedNavigationText(), "Интересы");
         });

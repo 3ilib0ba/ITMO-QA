@@ -13,28 +13,28 @@ import java.time.Duration;
 public class MessagesPage extends Page {
 
     // HEADER
-    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
-    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
-    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
-    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
-    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
+    private final By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
+    private final By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private final By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private final By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private final By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
 
 
-    private By privateMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[2]");
-    private By allMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[1]");
+    private final By privateMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[2]");
+    private final By allMessagesBy = By.xpath("/html/body/main/main/div/div/section/div[1]/nav/a[1]");
 
 
     // MAIN PAGE
-    private By getMoreOptionsOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div[1]/article[1]/div[2]/div[2]/div/a");
-    private By deleteMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[2]/div/nav/a[1]");
-    private By questionFromOneOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[1]/a[2]");
-    private By notificationBy = By.xpath("/html/body/div[2]/div/section/div[2]/a[2]");
+    private final By getMoreOptionsOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div[1]/article[1]/div[2]/div[2]/div/a");
+    private final By deleteMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[2]/div/nav/a[1]");
+    private final By questionFromOneOfMessageBy = By.xpath("/html/body/main/main/div/div/section/div[2]/div/article[1]/div[2]/div[1]/a[2]");
+    private final By notificationBy = By.xpath("/html/body/div[2]/div/section/div[2]/a[2]");
 
     // RIGHT SIDE BAR
-    private By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/h4/a");
-    private By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
+    private final By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/h4/a");
+    private final By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
 
-    public MessagesPage(WebDriver driver) {
+    public MessagesPage(final WebDriver driver) {
         super(driver);
     }
 
@@ -67,7 +67,7 @@ public class MessagesPage extends Page {
 
     public void showPrivateMessages() {
         Utils.getElementBySelector(driver, privateMessagesBy).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[@class=\"flex-1 bg-white text-gray-950\"]"), "Личные"));
 
@@ -75,7 +75,7 @@ public class MessagesPage extends Page {
 
     public void showAllMessages() {
         Utils.getElementBySelector(driver, allMessagesBy).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[@class=\"flex-1 bg-white text-gray-950\"]"), "Все"));
     }
@@ -106,7 +106,7 @@ public class MessagesPage extends Page {
     }
     public void rejectNotification() {
         try {
-            WebElement rejectNotificationButton = Utils.getElementBySelector(driver, notificationBy);
+            final WebElement rejectNotificationButton = Utils.getElementBySelector(driver, notificationBy);
             rejectNotificationButton.click();
         }
         catch (TimeoutException ignored) {}

@@ -12,25 +12,25 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ChangeLanguageTest {
+class ChangeLanguageTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void changeLanguageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void changeLanguageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 logInPage.changeLanguage();
                 Assertions.assertEquals(logInPage.getSignInButtonText(), "Log in");
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 logInPage.changeLanguage();
                 Assertions.assertEquals(logInPage.getSignInButtonText(), "Log in");
             }

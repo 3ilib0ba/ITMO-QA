@@ -8,34 +8,32 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SearchByInterestsTest {
+class SearchByInterestsTest {
     @BeforeAll
-    public static void prepareDrivers() {
+    static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void searchByInterestsTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void searchByInterestsTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            FriendsPage friendsPage = homePage.goToFriendsPage();
+            final FriendsPage friendsPage = homePage.goToFriendsPage();
             friendsPage.changeBarStateToInterests();
             friendsPage.searchByInterests("музыка");
-            ProfilePage profilePage = friendsPage.goToFirstSearchedFriendProfile();
-            ArrayList<String> a = profilePage.getInterests();
+            final ProfilePage profilePage = friendsPage.goToFirstSearchedFriendProfile();
             Assertions.assertTrue(profilePage.getInterests().contains("музыка"));
         });
         drivers.forEach(WebDriver::quit);

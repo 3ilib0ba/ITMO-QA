@@ -1,9 +1,7 @@
 package com.example.lab3.pages;
 
-import com.beust.ah.A;
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,23 +13,23 @@ import java.util.List;
 
 public class ProfilePage extends Page {
     // HEADER
-    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
-    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
-    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
-    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
-    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
-    private By askYourselfArea = By.xpath("//*[@id=\"question_question_text\"]");
-    private By askYourselfButton = By.xpath("//*[@id=\"profileAnswersForm\"]/div[2]/button");
+    private final By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
+    private final By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private final By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private final By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private final By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
+    private final By askYourselfArea = By.xpath("//*[@id=\"question_question_text\"]");
+    private final By askYourselfButton = By.xpath("//*[@id=\"profileAnswersForm\"]/div[2]/button");
 
     // NAVIGATION (ANSWERS, QUESTIONS, VERSUSES)
-    private By answersBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[1]");
-    private By questionsBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[2]");
-    private By versusesBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[3]");
+    private final By answersBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[1]");
+    private final By questionsBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[2]");
+    private final By versusesBar = By.xpath("/html/body/main/main/div/section[2]/header/nav/a[3]");
 
-    private By editProfileHref = By.xpath("/html/body/main/main/aside[1]/section/h2[1]/a");
+    private final By editProfileHref = By.xpath("/html/body/main/main/aside[1]/section/h2[1]/a");
 
-    private By usernameBy = By.xpath("/html/body/main/main/section[1]/header/div/div[1]/span");
-    public ProfilePage(WebDriver driver) {
+    private final By usernameBy = By.xpath("/html/body/main/main/section[1]/header/div/div[1]/span");
+    public ProfilePage(final WebDriver driver) {
         super(driver);
     }
 
@@ -68,27 +66,27 @@ public class ProfilePage extends Page {
 
     public void changeBarToAnswers() {
         Utils.getElementBySelector(driver, answersBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Ответы"));
     }
 
     public void changeBarToQuestions() {
         Utils.getElementBySelector(driver, questionsBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Вопросы"));
     }
 
     public void changeBarToVersuses() {
         Utils.getElementBySelector(driver, versusesBar).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Версус"));
     }
 
-    public void askYourself(String question) {
-        WebElement askingTextArea = Utils.getElementBySelector(driver, askYourselfArea);
+    public void askYourself(final String question) {
+        final WebElement askingTextArea = Utils.getElementBySelector(driver, askYourselfArea);
         askingTextArea.clear();
         askingTextArea.sendKeys(question);
 
@@ -103,9 +101,9 @@ public class ProfilePage extends Page {
     }
 
     public void likeAnswer() {
-        WebElement like = Utils.getElementBySelector(
+        final WebElement like = Utils.getElementBySelector(
                 driver, By.xpath("/html/body/main/main/div/article/div[3]/div[1]/a[1]"));
-        if (like.getAttribute("class").equals("icon-like")) {
+        if ("icon-like".equals(like.getAttribute("class"))) {
             like.click();
         }
     }
@@ -115,24 +113,28 @@ public class ProfilePage extends Page {
                 driver, By.xpath("/html/body/main/main/section[1]/header/div/h1/span")).getText();
     }
 
-    public ArrayList<String> getInterests() {
-        ArrayList<String> interests = new ArrayList<>();
-        WebElement list = Utils.getElementBySelector(
+    public List<String> getInterests() {
+        final ArrayList<String> interests = new ArrayList<>();
+        final WebElement list = Utils.getElementBySelector(
                 driver, By.xpath("/html/body/main/main/aside[1]/section/div/div/ul")
         );
-        List<WebElement> links = list.findElements(By.tagName("li"));
-        for (int i = 0; i < links.size(); i++) {
-            interests.add(links.get(i).getText().substring(1));
+        final List<WebElement> links = list.findElements(By.tagName("li"));
+        for (WebElement link: links) {
+            interests.add(link.getText().substring(1));
         }
         return interests;
     }
 
     public Boolean isAnswerLiked() {
-        WebElement like = Utils.getElementBySelector(
+        final WebElement like = Utils.getElementBySelector(
                 driver, By.xpath("/html/body/main/main/div/article/div[3]/div[1]/a[1]")
         );
-        if (like.getAttribute("class").equals("icon-like active")) return Boolean.TRUE;
-        else return Boolean.FALSE;
+        if ("icon-like active".equals(like.getAttribute("class"))) {
+            return Boolean.TRUE;
+        }
+        else {
+            return Boolean.FALSE;
+        }
     }
 
     public String getPressedNavigationText() {

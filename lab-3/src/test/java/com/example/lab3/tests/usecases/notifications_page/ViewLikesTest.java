@@ -16,21 +16,21 @@ public class ViewLikesTest {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewLikesTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewLikesTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            NotificationsPage notificationsPage = homePage.goToNotificationsPage();
+            final NotificationsPage notificationsPage = homePage.goToNotificationsPage();
             notificationsPage.changeWindowToLikesTheme();
             Assertions.assertEquals(notificationsPage.getPressedNavigationText(), "Лайки");
         });

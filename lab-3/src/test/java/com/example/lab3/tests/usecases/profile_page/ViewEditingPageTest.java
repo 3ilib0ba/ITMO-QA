@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewEditingPageTest {
+class ViewEditingPageTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewEditingPageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewEditingPageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            ProfilePage profilePage = homePage.goToProfilePage();
+            final ProfilePage profilePage = homePage.goToProfilePage();
             profilePage.goToEditingProfilePage();
             Assertions.assertEquals(webDriver.getCurrentUrl(), "https://ask.fm/account/settings/profile");
         });

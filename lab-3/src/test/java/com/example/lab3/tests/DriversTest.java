@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DriversTest {
+class DriversTest {
     @BeforeAll
     static void prepareDrivers() {
         Utils.prepareDrivers();
@@ -17,9 +17,9 @@ public class DriversTest {
         Utils.getDrivers().forEach(this::executeWithCapabilities);
     }
 
-    private void executeWithCapabilities(WebDriver driver) {
+    private void executeWithCapabilities(final WebDriver driver) {
         driver.get(Utils.BASE_URL);
-        String title = driver.getTitle();
+        final String title = driver.getTitle();
         assertEquals("Ask and Answer - ASKfm", title);
         driver.quit();
     }

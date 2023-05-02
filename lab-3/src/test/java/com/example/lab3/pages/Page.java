@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 public class Page {
     protected WebDriver driver;
 
-    public Page(WebDriver driver) {
+    public Page(final WebDriver driver) {
         this.driver = driver;
     }
 
@@ -13,7 +13,7 @@ public class Page {
         return driver;
     }
 
-    public void setDriver(WebDriver driver) {
+    public void setDriver(final WebDriver driver) {
         this.driver = driver;
     }
 }

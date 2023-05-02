@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewPrivateMessagesTest {
+class ViewPrivateMessagesTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewPrivateMessagesTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewPrivateMessagesTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
             messagesPage.showPrivateMessages();
             Assertions.assertEquals(messagesPage.getPressedNavigationText(), "Личные");

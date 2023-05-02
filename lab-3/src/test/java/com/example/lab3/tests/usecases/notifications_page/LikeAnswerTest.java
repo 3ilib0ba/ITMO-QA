@@ -11,29 +11,29 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class LikeAnswerTest {
+class LikeAnswerTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void likeAnswerTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void likeAnswerTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            NotificationsPage notificationsPage = homePage.goToNotificationsPage();
+            final NotificationsPage notificationsPage = homePage.goToNotificationsPage();
             notificationsPage.changeWindowToAnswerTheme();
-            ProfilePage profilePage = notificationsPage.goToAnswer();
+            final ProfilePage profilePage = notificationsPage.goToAnswer();
             profilePage.likeAnswer();
             Assertions.assertEquals(profilePage.isAnswerLiked(), Boolean.TRUE);
 

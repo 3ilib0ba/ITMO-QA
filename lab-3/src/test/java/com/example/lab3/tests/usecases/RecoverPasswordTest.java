@@ -10,28 +10,28 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class RecoverPasswordTest {
+class RecoverPasswordTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void recoverPasswordTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void recoverPasswordTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
-                RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
+                final RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
+                final LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
                 Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
-                RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
-                LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final RecoverPasswordPage recoverPasswordPage = logInPage.goToRecoverPasswordPage();
+                final LogInPageMain loginPageAfterRecover = recoverPasswordPage.recoverEmail();
                 Assertions.assertEquals(loginPageAfterRecover.getTitleText(), "Войти");
             }
         });

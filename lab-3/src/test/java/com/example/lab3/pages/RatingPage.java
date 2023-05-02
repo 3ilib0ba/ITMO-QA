@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class RatingPage extends Page {
-    private By titleBy = By.xpath("/html/body/main/main/div/div[1]");
-    private By ratingProfileBy = By.xpath("/html/body/main/main/div/div[2]/a[1]/div[2]/span[1]");
-    public RatingPage(WebDriver driver) {
+    private final By titleBy = By.xpath("/html/body/main/main/div/div[1]");
+    private final By ratingProfileBy = By.xpath("/html/body/main/main/div/div[2]/a[1]/div[2]/span[1]");
+    public RatingPage(final WebDriver driver) {
         super(driver);
     }
 

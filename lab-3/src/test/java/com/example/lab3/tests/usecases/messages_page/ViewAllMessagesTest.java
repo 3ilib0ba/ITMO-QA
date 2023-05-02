@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewAllMessagesTest {
+class ViewAllMessagesTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void viewAllMessagesTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewAllMessagesTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
             Assertions.assertEquals(messagesPage.getTitle(), "Вопросы");
         });
@@ -38,21 +38,21 @@ public class ViewAllMessagesTest {
     }
 
     @Test
-    public void viewAllMessagesViewInLoopTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewAllMessagesViewInLoopTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
             messagesPage.showAllMessages();
             Assertions.assertEquals(messagesPage.getTitle(), "Вопросы");

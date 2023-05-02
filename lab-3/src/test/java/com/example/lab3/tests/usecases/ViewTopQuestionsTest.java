@@ -10,28 +10,28 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ViewTopQuestionsTest {
+class ViewTopQuestionsTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void viewTopQuestionsFromHomePageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewTopQuestionsFromHomePageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            TopQuestionsPage topQuestionsPage = homePage.goToTopQuestionsPage();
+            final TopQuestionsPage topQuestionsPage = homePage.goToTopQuestionsPage();
             Assertions.assertEquals(topQuestionsPage.getTitleText(),
                     "\uD83C\uDDF7\uD83C\uDDFA\n" + "Россия\n" + "- О чем спрашивают люди");
         });
@@ -39,23 +39,23 @@ public class ViewTopQuestionsTest {
     }
 
     @Test
-    public void viewTopQuestionsFromMessagesPageTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void viewTopQuestionsFromMessagesPageTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            MessagesPage messagesPage = homePage.goToMessagesPage();
+            final MessagesPage messagesPage = homePage.goToMessagesPage();
             messagesPage.rejectNotification();
-            TopQuestionsPage topQuestionsPage = messagesPage.goToTopQuestionsPage();
+            final TopQuestionsPage topQuestionsPage = messagesPage.goToTopQuestionsPage();
             Assertions.assertEquals(topQuestionsPage.getTitleText(),
                     "\uD83C\uDDF7\uD83C\uDDFA\n" + "Россия\n" + "- О чем спрашивают люди");
         });

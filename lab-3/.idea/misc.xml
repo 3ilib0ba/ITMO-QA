@@ -9,6 +9,17 @@
     </option>
   </component>
   <component name="PDMPlugin">
+    <option name="customRuleSets">
+      <list>
+        <option value="C:\Anastasiya\ITMO_homework\6 семестр\ТПО\2lab\ITMO-QA\lab-3\src\test\java\com\example\lab3\config\pmd.xml" />
+      </list>
+    </option>
+    <option name="options">
+      <map>
+        <entry key="Statistics URL" value="" />
+        <entry key="Target JDK" value="17" />
+      </map>
+    </option>
     <option name="skipTestSources" value="false" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_16" default="true" project-jdk-name="16" project-jdk-type="JavaSDK">

@@ -11,23 +11,23 @@ import java.time.Duration;
 public class NotificationsPage extends Page {
 
     // HEADER
-    private By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
-    private By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
-    private By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
-    private By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
-    private By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
+    private final By homePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[1]");
+    private final By messagesPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[2]");
+    private final By notificationPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[3]");
+    private final By friendsPageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[4]");
+    private final By profilePageHrefBy = By.xpath("//*[@id=\"topMenu\"]/div[2]/section/nav/a[5]/p");
 
     // NAVIGATION ON PAGE(ALL, QUESTIONS, ANSWERS, LIKES)
-    private By navigationToAllThemes = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[1]");
-    private By navigationToQuestionsTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[2]");
-    private By navigationToAnswersTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[3]");
-    private By navigationToLikesTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[4]");
+    private final By navigationToAllThemes = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[1]");
+    private final By navigationToQuestionsTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[2]");
+    private final By navigationToAnswersTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[3]");
+    private final By navigationToLikesTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[4]");
 
     // QUESTION, ANSWER, LIKE
-    private By questionHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a");
-    private By answerHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[2]");
+    private final By questionHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a");
+    private final By answerHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[2]");
 
-    public NotificationsPage(WebDriver driver) {
+    public NotificationsPage(final WebDriver driver) {
         super(driver);
     }
 
@@ -60,27 +60,27 @@ public class NotificationsPage extends Page {
 
     public void changeWindowToAllThemes() {
         Utils.getElementBySelector(driver, navigationToAllThemes).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Все"));
     }
     public void changeWindowToQuestionsTheme() {
         Utils.getElementBySelector(driver, navigationToQuestionsTheme).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Вопросы"));
     }
 
     public void changeWindowToAnswerTheme() {
         Utils.getElementBySelector(driver, navigationToAnswersTheme).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Ответы"));
     }
 
     public void changeWindowToLikesTheme() {
         Utils.getElementBySelector(driver, navigationToLikesTheme).click();
-        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
+        final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Лайки"));
     }

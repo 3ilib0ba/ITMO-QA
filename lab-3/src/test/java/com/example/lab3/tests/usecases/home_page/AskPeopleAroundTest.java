@@ -13,25 +13,25 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class AskPeopleAroundTest {
+class AskPeopleAroundTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void askPeopleAroundTest() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void askPeopleAroundTest() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             HomePage homePage;
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
                 homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
             homePage.getAmountOfCharacters();

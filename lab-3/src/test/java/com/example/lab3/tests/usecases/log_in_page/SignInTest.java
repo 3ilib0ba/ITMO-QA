@@ -10,27 +10,27 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class SignInTest {
+class SignInTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
     @Test
-    public void testValidSignIn() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void testValidSignIn() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
-                HomePage homePage = logInPage.validSignIn();
-                ProfilePage profilePage = homePage.goToProfilePage();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
+                final HomePage homePage = logInPage.validSignIn();
+                final ProfilePage profilePage = homePage.goToProfilePage();
                 Assertions.assertEquals(profilePage.getUsername(), Utils.CORRECT_USERNAME);
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
-                HomePage homePage = logInPage.validSignIn();
-                ProfilePage profilePage = homePage.goToProfilePage();
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final HomePage homePage = logInPage.validSignIn();
+                final ProfilePage profilePage = homePage.goToProfilePage();
                 Assertions.assertEquals(profilePage.getUsername(), Utils.CORRECT_USERNAME);
             }
         });
@@ -38,19 +38,19 @@ public class SignInTest {
     }
 
     @Test
-    public void testInvalidSignIn() {
-        List<WebDriver> drivers = Utils.getDrivers();
+    void testInvalidSignIn() {
+        final List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
             try {
-                StartPage startPage = new StartPage(webDriver);
-                LogInPageSlave logInPage = startPage.goToLogInPage();
-                HomePage homePage = logInPage.invalidSignIn();
+                final StartPage startPage = new StartPage(webDriver);
+                final LogInPageSlave logInPage = startPage.goToLogInPage();
+                final HomePage homePage = logInPage.invalidSignIn();
                 Assertions.assertThrows(TimeoutException.class, homePage::goToProfilePage);
             }
             catch (TimeoutException e) {
-                LogInPageMain logInPage = new LogInPageMain(webDriver);
-                HomePage homePage = logInPage.invalidSignIn();
+                final LogInPageMain logInPage = new LogInPageMain(webDriver);
+                final HomePage homePage = logInPage.invalidSignIn();
                 Assertions.assertThrows(TimeoutException.class, homePage::goToProfilePage);
             }
         });
