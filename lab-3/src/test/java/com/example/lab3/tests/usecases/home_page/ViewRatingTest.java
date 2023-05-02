@@ -1,10 +1,7 @@
-package com.example.lab3.tests.usecases;
+package com.example.lab3.tests.usecases.home_page;
 
 import com.example.lab3.Utils;
-import com.example.lab3.pages.HomePage;
-import com.example.lab3.pages.LogInPageMain;
-import com.example.lab3.pages.LogInPageSlave;
-import com.example.lab3.pages.StartPage;
+import com.example.lab3.pages.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,14 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class AskPeopleAroundTest {
+public class ViewRatingTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
-
     @Test
-    public void askPeopleAroundTest() {
+    public void viewRatingTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
@@ -34,9 +30,8 @@ public class AskPeopleAroundTest {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
                 homePage = logInPage.validSignIn();
             }
-            homePage.getAmountOfCharacters();
-            homePage.askAround();
-            Assertions.assertEquals(homePage.getAmountOfCharacters(), 300);
+            RatingPage ratingPage = homePage.goToRatingPage();
+            Assertions.assertEquals(ratingPage.getTitleText(), "Еженедельный \uD83C\uDDF7\uD83C\uDDFA рейтинг");
         });
         drivers.forEach(WebDriver::quit);
     }

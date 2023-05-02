@@ -1,6 +1,7 @@
-package com.example.lab3.tests.usecases;
+package com.example.lab3.tests.usecases.home_page;
 
 import com.example.lab3.Utils;
+import com.example.lab3.pages.HomePage;
 import com.example.lab3.pages.LogInPageMain;
 import com.example.lab3.pages.LogInPageSlave;
 import com.example.lab3.pages.StartPage;
@@ -12,28 +13,30 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-public class ChangeLanguageTest {
+public class AskPeopleAroundTest {
     @BeforeAll
     public static void prepareDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void changeLanguageTest() {
+    public void askPeopleAroundTest() {
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             webDriver.get(Utils.BASE_URL);
+            HomePage homePage;
             try {
                 StartPage startPage = new StartPage(webDriver);
                 LogInPageSlave logInPage = startPage.goToLogInPage();
-                logInPage.changeLanguage();
-                Assertions.assertEquals(logInPage.getSignInButtonText(), "Log in");
+                homePage = logInPage.validSignIn();
             }
             catch (TimeoutException e) {
                 LogInPageMain logInPage = new LogInPageMain(webDriver);
-                logInPage.changeLanguage();
-                Assertions.assertEquals(logInPage.getSignInButtonText(), "Log in");
+                homePage = logInPage.validSignIn();
             }
+            homePage.getAmountOfCharacters();
+            homePage.askAround();
+            Assertions.assertEquals(homePage.getAmountOfCharacters(), 300);
         });
         drivers.forEach(WebDriver::quit);
     }
