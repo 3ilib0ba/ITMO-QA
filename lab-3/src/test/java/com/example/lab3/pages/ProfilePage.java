@@ -2,6 +2,7 @@ package com.example.lab3.pages;
 
 import com.example.lab3.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -83,15 +84,6 @@ public class ProfilePage extends Page {
         final WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(25));
         driverWait.until(ExpectedConditions.textToBe(
                 By.xpath("//a[contains(@class, \"bg-white text-gray-950\")]"), "Версус"));
-    }
-
-    public void askYourself(final String question) {
-        final WebElement askingTextArea = Utils.getElementBySelector(driver, askYourselfArea);
-        askingTextArea.clear();
-        askingTextArea.sendKeys(question);
-
-        Utils.getElementBySelector(driver, askYourselfButton).click();
-        Utils.waitUntilPageLoads(driver);
     }
 
     public Page goToEditingProfilePage() {

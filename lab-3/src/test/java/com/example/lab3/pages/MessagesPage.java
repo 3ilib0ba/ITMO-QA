@@ -31,7 +31,6 @@ public class MessagesPage extends Page {
     private final By notificationBy = By.xpath("/html/body/div[2]/div/section/div[2]/a[2]");
 
     // RIGHT SIDE BAR
-    private final By viewAnswersInTopBy = By.xpath("/html/body/main/main/aside[2]/section[1]/article[1]/h4/a");
     private final By viewTopQuestionsBy = By.xpath("/html/body/main/main/aside[2]/section[1]/a");
 
     public MessagesPage(final WebDriver driver) {
@@ -91,12 +90,6 @@ public class MessagesPage extends Page {
         Utils.getElementBySelector(driver, questionFromOneOfMessageBy).click();
         Utils.waitUntilPageLoads(driver);
         return new QuestionPage(driver);
-    }
-
-    public AnswersPage goToAnswersInTop() {
-        Utils.getElementBySelector(driver, viewAnswersInTopBy).click();
-        Utils.waitUntilPageLoads(driver);
-        return new AnswersPage(driver);
     }
 
     public TopQuestionsPage goToTopQuestionsPage() {
