@@ -24,7 +24,7 @@ public class NotificationsPage extends Page {
     private final By navigationToLikesTheme = By.xpath("/html/body/main/main/div/div/section/header/div[2]/nav/a[4]");
 
     // QUESTION, ANSWER, LIKE
-    private final By questionHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a");
+    private final By questionHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[@class=\"streamItem_content\"]");
     private final By answerHrefBy = By.xpath("/html/body/main/main/div/div/section/div/div/div[1]/a[2]");
 
     public NotificationsPage(final WebDriver driver) {

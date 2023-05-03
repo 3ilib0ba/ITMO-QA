@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class QuestionPage extends Page {
     private final By inputAnswerBy = By.xpath("//*[@id=\"question_answer_text\"]");
+    //*[@id="question_question_text"]
     private final By inputQuestionBy = By.xpath("//*[@id=\"question_question_text\"]");
 
     private final By sendAnswerBy = By.xpath("//*[@id=\"answersNewForm\"]/div[2]/button");
